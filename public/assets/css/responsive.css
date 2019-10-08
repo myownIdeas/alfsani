@@ -1,0 +1,18 @@
+@media(max-width:767px){
+    .sidebar{
+        left:-200px;
+    }
+    .content{
+        padding-left:0;
+    }
+    .sidebar.active {
+    left: 0;
+}
+.content-box{
+    padding:25px 10px;
+}
+
+.cst-table-row .row:nth-child(2){
+    overflow-x:auto;
+}
+}
