@@ -52,9 +52,23 @@ class CompanyController  extends Controller
 
     public function pureData($records){
         $finalData = '';
+        $final = [];
+        $fullFinal = [];
         $collection = collect($records);
-        return $collection->groupBy('year');
-
+        $records = $collection->groupBy('year');
+        //dd($records);
+        foreach ($records as $key=>$val){
+            array_push($final,$key);
+        }
+        sort($final);
+        foreach ($final as $value){
+            foreach ($records as $key=>$all){
+                if($value == $key){
+                    $fullFinal[$key] = $all;
+                }
+            }
+        }
+        return $fullFinal;
 
     }
     public function edit(Requestt $request){

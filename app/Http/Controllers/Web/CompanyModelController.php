@@ -191,6 +191,11 @@ class CompanyModelController  extends Controller
         $model->save();
         return 'true';
     }
+    public function deleteModel(Requestt $request){
+        $model = Company::where('id',$request->get('modelId'))->first();
+        $model->delete();
+        return 'true';
+    }
 
     public function updateModelItems(Requestt $request){
         $item=  CompanyModel::where('id',$request->get('itemId'))->first();

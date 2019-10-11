@@ -98,7 +98,7 @@
 
             </div>
             <div class="d-flex justify-content-between flex-wrap">
-                <a href="javascript:void(0);" onclick="appendMoreOrders()" class="btn btn-info">Add More Order </a>
+                <a href="javascript:void(0);" onclick="updateMoreOrders()" class="btn btn-info">Add More Order </a>
                {{-- <button type="submit" class="btn btn-primary">Update Order</button>--}}
             </div>
         </form>

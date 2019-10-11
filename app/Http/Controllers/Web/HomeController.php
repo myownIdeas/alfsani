@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\City;
+use App\Http\Repo\DashboardTrait;
 use App\Http\Response\Response\WebResponse;
 use App\Http\Controllers\Controller;
 
@@ -18,6 +19,7 @@ class HomeController  extends Controller
     public $response;
     public $request ="";
     public $home ="";
+    use DashboardTrait;
     public function __construct(WebResponse $webResponse)
     {
         $this->response = $webResponse;
@@ -52,11 +54,15 @@ class HomeController  extends Controller
 
         if($user !=null && $user->password == md5($request->get('password'))){
                    $request->session()->put('user', $user);
-                   return $this->response->setView("web.dashboard.dashboard")->respond(["data"=>[  ]]);
+                   return $this->response->setView("web.dashboard.dashboard")->respond(["data"=>[
+                       'records'=>$this->dashboardRecords()
+                       ]]);
         }else{
             Redirect::back();
         }
     }
+
+
 
     public function listingPage(Request $request)
     {
@@ -117,6 +123,7 @@ class HomeController  extends Controller
         $shopData->name = $request->shop_name;
          $shopData->person_name = $request->person_name;
          $shopData->mobile = $request->mobile;
+         $shopData->work_type = $request->work_type;
          $shopData->what_app_number = $request->whats_app;
          $shopData->ptcl = $request->ptcl;
          $shopData->city_id = $request->city_id;

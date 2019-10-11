@@ -180,7 +180,7 @@ function getSubModelsForList(itemId,id){
                 $.each(models, function(index, model) {
                 html +='<span><b>'+index+'</b></span>';
                 $.each(model,function (subindex,submodel) {
-                    html += '<li><a href="javascript:void(0)" onclick="getSubModelsForList('+submodel.id+','+"'"+scnd+"'"+')">'+submodel.name+' <a class="text-right"href="javascript:void(0)" onclick="showModel('+subindex+','+"'"+counterIndex+"'"+')">Edit</a></a></li>';
+                    html += '<li><a href="javascript:void(0)" onclick="getSubModelsForList('+submodel.id+','+"'"+scnd+"'"+')">'+submodel.name+' <a class="text-right"href="javascript:void(0)" onclick="showModel('+subindex+','+"'"+counterIndex+"'"+')">Edit</a>/<a class="text-right"href="javascript:void(0)" onclick="deleteModel('+submodel.id+')">Delete</a></a></li>';
                     html += '<div style="display:none" id="'+counterIndex+subindex+'"><div class="input-group"><input class="form-control" type="text" id="md'+counterIndex+'"> <div class="input-group-prepend"><a class="btn btn-info" href="javascript:void(0)" onclick="updateMyModel('+submodel.id+','+counterIndex+','+"'"+id+"'"+')">update</a></div></div></div>';
                 });
                     counterIndex++;
@@ -208,6 +208,16 @@ function getSubModelsForList(itemId,id){
         }
 
     });
+}
+function deleteModel(id) {
+    $.ajax({
+        type:'GET',
+        url:url+'/deleteModel',
+        data:{modelId:id},
+        success:function(data){
+            window.location.reload();
+        }
+    })
 }
 function updateMyModel(modelId,condition){
     var name = $('#md'+condition).val();
@@ -541,6 +551,75 @@ function appendMoreOrders(){
     });
 
 }
+function updateMoreOrders(){
+
+
+    $.ajax({
+
+        type:'GET',
+
+        url:url+'/getCompanies',
+
+        data:{},
+
+        success:function(data){
+            var items =  JSON.parse(data);
+            var optionList = '';
+            $.each(items, function(index, item) {
+                optionList +='<option value="'+item.id+'">'+item.name+'</option>'
+            });
+            updateOrderHtml(optionList,'update');
+        }
+    });
+
+}
+function updateOrderHtml(optionList,condition){
+
+    $('#more_order_list').append(
+
+
+        '<div class="form-group">'+
+        '<label for="">Select Company</label>'+
+        '<select name="company_id[]" id="company_id'+counter+'" onchange="getSubCategories(this.value,'+"'"+'sub_model'+counter+"'"+')" class="form-control">'+
+        '<option value="0">Please Select Parent Category</option>'+
+        optionList+
+
+        '</select>'+
+        '</div>'+
+        '<div class="row col-12">'+
+
+        '<label for="">Select First Model</label>'+
+        '<select name="model_id[]" onchange="getSubCategories(this.value,'+"'"+'sec_model'+counter+"'"+')" id="sub_model'+counter+'" class="form-control">'+
+        '</select>'+
+        '</div>'+
+        '<div class="row col-12">'+
+
+        '<label for="">Select Second Model</label>'+
+        '<select name="second_model[]" onchange="getSubCategories(this.value,'+"'"+'third_model'+counter+"'"+')" id="sec_model'+counter+'" class="form-control">'+
+        '</select>'+
+        '</div>'+
+        '<div class="row col-12">'+
+        '<label for="">Select Third Model</label>'+
+        '<select name="third_model[]" onchange="getSubCategories(this.value)" id="third_model'+counter+'" class="form-control">'+
+        '</select>'+
+        '</div>'+
+        '<div class="col-12">'+
+        '<label for="">Search Item</label>'+
+        '<input type="text" required class="form-control" onkeyup="searchItem(this.value,'+counter+','+"'"+condition+"'"+')">'+
+        '<div>'+
+        '<ul id="appendItemsHere'+counter+'">'+
+
+        '</ul>'+
+        '</div>'+
+        '</div>'+
+        '<div class="row col-12" id="add_more_itmes'+counter+'">'+
+        '</div>'+
+        '<br />'+
+        '<br />'
+    )
+    counter++;
+}
+
 function appendOrderHtml(optionList){
 
     $('#more_order_list').append(

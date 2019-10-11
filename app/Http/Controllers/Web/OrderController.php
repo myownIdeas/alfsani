@@ -53,7 +53,8 @@ class OrderController  extends Controller
         return $this->response->setView("web.order.update")->respond(["data"=>[
                 'companies'=>Company::where('parent_category',0)->get(),
                 'order'=>Order::where('id',$orderId)->first(),
-                'orderDetail'=>OrderDetail::where('order_id',$orderId)->groupBy('third_model')->get(),
+               // 'orderDetail'=>OrderDetail::where('order_id',$orderId)->groupBy('third_model')->get(),
+                'orderDetail'=>OrderDetail::where('order_id',$orderId)->get(),
         ]]);
     }
 
@@ -122,6 +123,7 @@ class OrderController  extends Controller
             $order->group_id = $request->group_id;
             $order->agent_id = $user->id;
             $order->delivery_agent = 0;
+            $order->order_date = date('Y/d/m');
             $order->total_price = $request->final_amount;
             $order->save();
             $orderId = $order->id;

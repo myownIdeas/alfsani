@@ -47,7 +47,11 @@
     <nav class="sidebar">
         <ul class="list-unstyled components">
         @if( \Session::get('user')->user_type ==1 )
-            <li class="active">
+                <li class="active">
+                    <a  href="{{URL::to('dashboard')}}" ><i class="fas fa-store-alt"></i> Dashboard</a>
+
+                </li>
+            <li class="">
                 <a  href="#homeSubmenu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle"><i class="fas fa-store-alt"></i> Shop</a>
                 <ul class="collapse list-unstyled show" id="homeSubmenu">
                     <li>

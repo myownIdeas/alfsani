@@ -24,7 +24,15 @@ Route::get('/',
         'uses'=>'HomeController@index',
     ]
 );
-
+Route::get('/dashboard',
+    [
+        'middleware'=>
+            [
+                // 'webValidate:forgetPasswordRequest'
+            ],
+        'uses'=>'DashboardController@index',
+    ]
+);
 Route::get('add/shop',
     [
         'middleware'=>
@@ -406,6 +414,15 @@ Route::get('updateModel',
                 // 'webValidate:forgetPasswordRequest'
             ],
         'uses'=>'CompanyModelController@updateModel',
+    ]
+);
+Route::get('deleteModel',
+    [
+        'middleware'=>
+            [
+                // 'webValidate:forgetPasswordRequest'
+            ],
+        'uses'=>'CompanyModelController@deleteModel',
     ]
 );
 

@@ -32,7 +32,7 @@
                     </div>
                 <div class="form-group">
                     <label for="">Work Type</label>
-                    <input type="text" class="form-control" name="mobile" value="{{$response['data']['shop']->work_type}}" required>
+                    <input type="text" class="form-control" name="work_type" value="{{$response['data']['shop']->work_type}}" required>
                 </div>
                 <div class="more_mobile">
                     @foreach($response['data']['shop']->shopDetailContent as $detail)
