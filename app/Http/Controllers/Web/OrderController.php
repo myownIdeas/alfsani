@@ -22,8 +22,11 @@ class OrderController  extends Controller
     }
     public function orderListing(Request $request){
        $userId = $request->session()->get('user')->id;
+
         if($userId == 1){
-            $order =  Order::all();
+            $order =  Order::orderBy('created_at', 'desc')->get();
+            //dd($order[0]->myStatus->name);
+            //dd($order);
         }else{
             $order =  Order::where('agent_id',$userId)->get();
         }
@@ -106,7 +109,7 @@ class OrderController  extends Controller
        // dd($orderDetails);
         foreach($orderDetails as $detail){
            $stock =  Stock::where('item_id',$detail->item_id)->first();
-           dd($stock);
+
             $stock->qty = ($stock->qty - $detail->quantity);
             $stock->save();
         }
@@ -116,25 +119,53 @@ class OrderController  extends Controller
     }
 
     public function placeOrder(Request  $request){
+
             $user = $request->session()->get('user');
             $order = new Order();
-
             $order->shop_id = $request->shop_id;
             $order->group_id = $request->group_id;
             $order->agent_id = $user->id;
             $order->delivery_agent = 0;
             $order->order_date = date('Y/d/m');
-            $order->total_price = $request->final_amount;
+            $order->total_price = 0;
+            $order->status = 1;
             $order->save();
             $orderId = $order->id;
             $final=[];
         //dd($request->all());
+
+        $linPrice ='';
         $totalPrice = 0;
+        $afterDiscount = 0;
             foreach($request->itemId as $key=>$order){
 
                 $findKey= key($order);
-                $totalPrice = $totalPrice + $request->linePrice[$findKey];
+
                // dd($findKey);
+                $itemDiscount = DB::table('company_item')
+                    ->select('item_discount.discount_rate')
+                    ->leftJoin('item_discount','company_item.id','=','item_discount.item_id')
+                    ->where('company_item.company_id',$request->company_id[$findKey])
+                    ->where('company_item.third_model',$request->third_model[$findKey])
+                    ->where('item_discount.shop_id',$request->shop_id)
+                    ->where('item_discount.item_id',$order[$findKey])
+                    ->get();
+                if(isset($itemDiscount[0])){
+
+
+                    $linPrice = $request->linePrice[$findKey];
+                    $totalPrice = $totalPrice + ($request->quantity[$findKey] * $request->linePrice[$findKey]);
+                    $linDiscountPrice = (($totalPrice * $itemDiscount[0]->discount_rate)/100);
+                    $afterDiscount = $totalPrice - $linDiscountPrice;
+                    $itemDiscount =$itemDiscount[0]->discount_rate;
+                }else{
+                    $itemDiscount =0;
+                    $linPrice = $request->linePrice[$findKey];
+                    $totalPrice = $totalPrice + ($request->quantity[$findKey] *$request->linePrice[$findKey]) ;
+                    $afterDiscount = $totalPrice;
+                }
+
+
                 $final[] = [
                     'order_id'=>$orderId,
                     'company_id'=>$request->company_id[$findKey],
@@ -142,13 +173,18 @@ class OrderController  extends Controller
                     'second_model'=>$request->second_model[$findKey],
                     'third_model'=>$request->third_model[$findKey],
                     'item_id'=>$order[$findKey],
+                    'item_discount'=>$itemDiscount,
                     'quantity'=>$request->quantity[$findKey],
                     'set_pack'=>$request->item_set[$findKey],
-                    'line_price'=>$request->linePrice[$key],
+                    'line_price'=>$linPrice,
                 ];
             }
 
         DB::table('order_detail')->insert($final);
+        $orderPrice =  Order::where('id',$orderId)->first();
+        $orderPrice->total_price = $totalPrice;
+        $orderPrice->after_discount = $afterDiscount;
+        $orderPrice->save();
 
 
         return Redirect::back();

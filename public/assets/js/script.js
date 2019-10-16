@@ -429,6 +429,7 @@ function appendLiResult(shopid){
 function searchItem(value,myindex,update){
 
     var model = $('#third_model'+myindex).val();
+    var companyId = $('#company_id'+myindex).val();
     $.ajax({
 
         type:'GET',

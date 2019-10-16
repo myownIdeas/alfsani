@@ -60,7 +60,7 @@ class CompanyController  extends Controller
         foreach ($records as $key=>$val){
             array_push($final,$key);
         }
-        sort($final);
+        rsort($final);
         foreach ($final as $value){
             foreach ($records as $key=>$all){
                 if($value == $key){

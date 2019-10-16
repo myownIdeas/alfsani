@@ -771,6 +771,24 @@ Route::get('item_listing',
         'uses'=>'CompanyModelController@itemListingPage',
     ]
 );
+Route::get('add_item_discount',
+    [
+        'middleware'=>
+            [
+
+            ],
+        'uses'=>'CompanyModelController@itemDiscountPage',
+    ]
+);
+Route::get('item_discount_listing',
+    [
+        'middleware'=>
+            [
+
+            ],
+        'uses'=>'CompanyModelController@itemDiscount',
+    ]
+);
 Route::get('getCompanyItemListing',
     [
         'middleware'=>
@@ -782,6 +800,33 @@ Route::get('getCompanyItemListing',
 );
 
 
+Route::get('getItemsForDiscount',
+    [
+        'middleware'=>
+            [
+
+            ],
+        'uses'=>'CompanyModelController@getItemsForDiscount',
+    ]
+);
+Route::post('insert/item/discount',
+    [
+        'middleware'=>
+            [
+
+            ],
+        'uses'=>'CompanyModelController@insertItemDiscount',
+    ]
+);
+Route::get('checkItemCondition',
+    [
+        'middleware'=>
+            [
+
+            ],
+        'uses'=>'CompanyModelController@checkItemCondition',
+    ]
+);
 Route::get('getItems',
     [
         'middleware'=>

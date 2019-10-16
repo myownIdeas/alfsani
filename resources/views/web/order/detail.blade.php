@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-md-3">
                     <h4>Invoice No</h4>
-                    <span>GS 000014</span>
+                    <span>GS {{$response['data']['order']->id}}</span>
                 </div>
                 <div class="col-md-3">
                     <h4>Bilty NO</h4>
@@ -49,9 +49,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                {{$totalPrice = 0}}
+                <?php $totalPrice = 0 ?>
                 @foreach($response['data']['orderDetail'] as $detail)
-                    {{$totalPrice = $totalPrice + $detail->line_price}}
+                    {{$totalPrice = $totalPrice + ($detail->quantity *$detail->line_price)}}
                     <tr>
                         <td>{{$detail->companyId->name}}</td>
                         <td>{{$detail->firstModel->name}}</td>
@@ -60,7 +60,7 @@
                         <td>{{$detail->thirdModel->year}}</td>
                         <td>{{$detail->item->item}}</td>
                         <td>{{$detail->quantity}}</td>
-                        <td class="center">{{$detail->line_price}}</td>
+                        <td class="center">{{($detail->quantity * $detail->line_price)}}</td>
                     </tr>
                 @endforeach
                 </tbody>

@@ -2,14 +2,17 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Order extends Authenticatable
+class Order extends Model
 {
     use Notifiable;
     protected $table = 'orders';
-
+    public function myStatus(){
+        return $this->belongsTo('App\Status','status');
+    }
     public function shop(){
         return $this->belongsTo('App\ShopeCenter','shop_id');
     }

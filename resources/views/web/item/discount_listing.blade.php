@@ -13,21 +13,22 @@
                 </div>
             </div>
         </section>
+        <div><a href="{{URL::to('add_item_discount')}}">Add Discount</a> </div>
         <div class="container-fluid">
             <div class="content-box">
                 <div class="cst-table-row">
                 <table id="example" class="table listing-table" style="width:100%">
                     <thead>
                     <tr>
+                        <th>Shop Name</th>
                         <th>Company Name</th>
                         <th>First Model Name </th>
                         <th>Second Model Name </th>
                         <th>Third Model Name </th>
                         <th>Items </th>
-                        <th>purchase Price </th>
-                        <th>Sale Price </th>
-                        <th></th>
+                        <th>Discount</th>
                         <th>Date</th>
+                        <th>Action</th>
 
                     </tr>
                     </thead>
@@ -35,15 +36,15 @@
                     @foreach($response['data']['modelWithItems'] as $modelItem)
                     <tr>
 
+                        <td>{{$modelItem->shopName}}</td>
                         <td>{{$modelItem->name}}</td>
                         <td>{{$modelItem->fName}} </td>
                         <td>{{$modelItem->sName}} </td>
                         <td>{{$modelItem->tName}} </td>
-                        <td>{{$modelItem->tName}} </td>
-                        <td>{{$modelItem->purchase_price}} </td>
-                        <td>{{$modelItem->price}} </td>
-                        <td><a href="#" onclick="showItems({{$modelItem->third_model.','.$modelItem->company_id}})"> show Items</a></td>
+                        <td>{{$modelItem->itemName}} </td>
+                        <td>{{$modelItem->discount_rate}} </td>
                         <td>{{$modelItem->created_at}}</td>
+                        <td><a href="{{URL::to('edit_discount_item/')}}">Edit</a> </td>
 
                     </tr>
                   @endforeach

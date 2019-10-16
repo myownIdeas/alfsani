@@ -106,7 +106,7 @@
 
                 </ul>
             </li>
-
+            @if( \Session::get('user')->user_type ==1 )
             <li>
 
 
@@ -142,6 +142,9 @@
                         <li>
                             <a href="{{URL::to('item_listing')}}">Item Listing</a>
                         </li>
+                        <li>
+                            <a href="{{URL::to('item_discount_listing')}}">Item Discount</a>
+                        </li>
 
                     </ul>
                     <a href="#company_model" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Model</a>
@@ -154,7 +157,7 @@
                         </li>
 
                     </ul>
-                    @if( \Session::get('user')->user_type ==1 )
+
                     <a href="#user" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Add User</a>
                     <ul class="collapse list-unstyled" id="user">
                         <li>
@@ -168,12 +171,12 @@
                         </li>
 
                     </ul>
-                    @endif
+
                 </ul>
 
             </li>
 
-
+            @endif
         </ul>
 
 

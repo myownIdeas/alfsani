@@ -23,7 +23,7 @@ trait DashboardTrait
     }
 
     public function todayOrders(){
-        $now = date('Y/m/d');
+        $now = date('Y/d/m');
 
         return DB::table('orders')
                         ->where('order_date','>=',$now)
@@ -34,7 +34,7 @@ trait DashboardTrait
             ->count();
     }
     public function todayDelivery(){
-        $now = date('Y/m/d');
+        $now = date('Y/d/m');
 
         return DB::table('orders')
             ->where('status',2)
@@ -42,16 +42,16 @@ trait DashboardTrait
             ->where('order_date','<=',$now)->count();
     }
     public function totalAmount(){
-        $now = date('Y/m/d');
+
 
         return DB::table('orders')
-            ->sum('total_price');
+            ->sum('after_discount');
     }
     public function todayAmount(){
-        $now = date('Y/m/d');
+        $now = date('Y/d/m');
 
         return DB::table('orders')
             ->where('order_date','>=',$now)
-            ->where('order_date','<=',$now)->sum('total_price');
+            ->where('order_date','<=',$now)->sum('after_discount');
     }
 }

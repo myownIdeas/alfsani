@@ -28,7 +28,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Add Password</label>
-                            <input type="text" name="password" class="form-control">
+                            <input type="password" name="password" class="form-control">
                         </div>
                         <button type="submit" class="btn btn-primary">ADD User</button>
                     {{Form::close()}}

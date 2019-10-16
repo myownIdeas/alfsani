@@ -58,7 +58,13 @@
                             <input type="text" required class="form-control" name="itemName[]">
                             </div>
                         </div>
+                        <div class="col-6">
+                            <div class="form-group ">
 
+                                <label for="">Per Peace purchase Price</label>
+                                <input type="number" required class="form-control" name="itemPurchasePrice[]">
+                            </div>
+                        </div>
                         <div class="col-6">
                             <div class="form-group ">
                             

@@ -23,6 +23,9 @@
                         <th>Group Name</th>
                         <th>Agent Name</th>
                         <th>Total Price</th>
+                        <th>After Discount</th>
+                        <th>Date Time</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -33,10 +36,14 @@
                     <td>{{$order->group->name}}</td>
                     <td>{{$order->agent->name}}</td>
                     <td>{{$order->total_price}}</td>
+                    <td>{{$order->after_discount}}</td>
+                    <td>{{$order->created_at}}</td>
+                    <td>{{$order->myStatus->name}}</td>
                     <td>
                         <a href="{{URL::to('order_detail/'.$order->id)}}">Detail</a>
-
+                    @if($order->myStatus->id !=2)
                         <a href="{{URL::to('order_update/'.$order->id)}}">Update</a>
+                        @endif
                         {{--<a href="{{URL::to('order_finish/'.$order->id)}}">Finish</a>--}}
 
                         {{--<a href="{{URL::to('order_delete/'.$order->id)}}" onclick="return confirm('Are you sure you want to delete this order?');">Delete</a>--}}
