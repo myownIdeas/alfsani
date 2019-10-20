@@ -48,7 +48,7 @@
         <ul class="list-unstyled components">
         @if( \Session::get('user')->user_type ==1 )
                 <li class="active">
-                    <a  href="{{URL::to('dashboard')}}" ><i class="fas fa-store-alt"></i> Dashboard</a>
+                    <a  href="{{URL::to('dashboard')}}" ><i class="fas fa-acometer-alt"></i> Dashboard</a>
 
                 </li>
             <li class="">

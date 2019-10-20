@@ -2,8 +2,6 @@
 @import 'bootstrap.min.css';
 @import 'datatables.min.css';
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,400,500,700&display=swap');
-
-
 body {
     font-family: 'IBM Plex Sans', sans-serif;
     line-height: normal;
@@ -12,6 +10,7 @@ body {
     background: #f1f2f7;
     color: #001737;
 }
+
 a.active,
 a:focus,
 button:focus,
@@ -109,16 +108,12 @@ img {
     z-index: 5;
 }
 
-
-
 .navbar .brand_name {
     padding-right: 15px;
     font-size: 21px;
     text-transform: uppercase;
     color: #FF6C60;
 }
-
-
 
 .navbar .brand_name span {
     color: #2e2e2e;
@@ -137,6 +132,7 @@ img {
     margin: 40px 0;
 }
 
+
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
@@ -144,7 +140,6 @@ img {
 .wrapper {
     width: 100%;
 }
-
 
 .sidebar {
     min-width: 200px;
@@ -159,7 +154,7 @@ img {
     bottom: 0;
     z-index: 4;
     overflow-y: auto;
-    box-shadow:0 8px 10px 0 rgba(183, 192, 206, 0.2);
+    box-shadow: 0 8px 10px 0 rgba(183, 192, 206, 0.2);
 }
 
 .sidebar.active {
@@ -187,10 +182,10 @@ img {
 }
 
 .sidebar ul li a {
-   font-family: 'IBM Plex Sans', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     padding: 14px 20px;
     display: block;
-   color: #001737;
+    color: #001737;
     font-size: 14px;
     position: relative;
     font-weight: 500;
@@ -201,30 +196,32 @@ img {
     padding-right: 5px;
 }
 
-.sidebar ul li.active .dropdown-toggle[aria-expanded="true"]{
+.sidebar ul li.active .dropdown-toggle[aria-expanded="true"] {
     background: rgba(237, 77, 83, .06);
     border-left: 3px solid #ff6c60;
     color: #ff6c60;
     border-radius: 0 40px 40px 0;
 }
 
-.sidebar ul li.active ul .dropdown-toggle[aria-expanded="true"]{
+.sidebar ul li.active ul .dropdown-toggle[aria-expanded="true"] {
     background-color: transparent;
     border: none;
     color: #001737;
     border-radius: 0;
-} 
-.sidebar ul li ul ul{
+}
+
+.sidebar ul li ul ul {
     padding-left: 16px;
 }
+
 .sidebar ul li.active>a,
 .sidebar ul li.active>a[aria-expanded="true"],
-
 .sidebar ul li a:hover {
     color: #ff6c60;
 }
 
-.sidebar ul li ul li a,.sidebar ul li ul a {
+.sidebar ul li ul li a,
+.sidebar ul li ul a {
     text-transform: capitalize;
     padding: 9px 0;
     font-size: 13px;
@@ -254,7 +251,6 @@ a[data-toggle="collapse"] {
 .sidebar ul li a[aria-expanded="true"]:after {
     transform: rotate(90deg);
     top: 34%;
-
 }
 
 .sidebar ul li ul {
@@ -285,10 +281,10 @@ a.article:hover {
 }
 
 
-
 /* ---------------------------------------------------
     CONTENT STYLEc
 ----------------------------------------------------- */
+
 .content {
     width: 100%;
     min-height: calc(100vh - 60px);
@@ -296,9 +292,8 @@ a.article:hover {
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
     transform-origin: bottom left;
     padding-left: 200px;
-    background-color:#f9fafb;
-    padding-bottom:50px;
-
+    background-color: #f9fafb;
+    padding-bottom: 50px;
 }
 
 .content.active {
@@ -334,20 +329,16 @@ a.article:hover {
     transform: rotate(-45deg) translate(1px, -1px);
 }
 
-
 .sidebarCollapse.active span {
     transform: none;
     opacity: 1;
     margin: 5px auto;
 }
 
-
-
 .content-box {
     background-color: #fff;
     padding: 25px;
     box-shadow: 0 0 10px 0 rgba(183, 192, 206, 0.2);
-
 }
 
 .sub-header {
@@ -363,24 +354,24 @@ a.article:hover {
     font-size: 23px;
 }
 
+
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
-
-
-
-
 
 .listing-table tbody tr td a {
     display: inline-block;
     margin: 0 5px;
 }
-.listing-table tbody tr td a{
-    color:#ff6c60;
+
+.listing-table tbody tr td a {
+    color: #ff6c60;
 }
-.listing-table tbody tr td a.btn{
-    color:#fff;
+
+.listing-table tbody tr td a.btn {
+    color: #fff;
 }
+
 .listing-table thead tr th,
 .listing-table tbody tr td {
     font-size: 13px;
@@ -392,11 +383,12 @@ a.article:hover {
     color: #ec230f;
 }
 
-.listing-table thead tr th{
-        border-bottom-width: 1px;
+.listing-table thead tr th {
+    border-bottom-width: 1px;
     background-color: #ff6c60;
     color: #fff;
 }
+
 .login-box {
     flex-basis: 400px;
     margin: 0 auto;
@@ -466,8 +458,6 @@ a.article:hover {
     cursor: pointer
 }
 
-
-
 .upload-btn-wrapper input[type=file] {
     font-size: 100px;
     position: absolute;
@@ -475,7 +465,6 @@ a.article:hover {
     top: 0;
     opacity: 0;
 }
-
 
 .img-upload label {
     display: block;
@@ -488,12 +477,8 @@ a.article:hover {
     flex-wrap: wrap;
 }
 
-
-
-
 .box-card {
     background-color: #fff;
-
     border-radius: 8px;
     -webkit-box-shadow: undefinedpx undefinedpx 10px 10px #000000;
     box-shadow: undefinedpx undefinedpx 10px 10px #000000;
@@ -504,7 +489,6 @@ a.article:hover {
     border-bottom: 1px solid #ddd;
     background-color: #fff;
     font-weight: 600;
-
 }
 
 .box-card .card-header {
@@ -574,7 +558,6 @@ a.article:hover {
     height: 100%;
 }
 
-
 .link-for a {
     margin: 0 5px;
 }
@@ -639,7 +622,6 @@ a.article:hover {
     border-bottom: none;
 }
 
-
 .shop-listing {
     padding: 5px 0;
 }
@@ -661,14 +643,12 @@ a.article:hover {
     color: #ff6c60;
 }
 
-
 .form-control {
     border: 1px solid #e8ebf3;
     height: calc(2.3rem + 2px);
     color: #000;
     font-size: .8rem;
     height: calc(1.5em + .75rem + 7px);
-
 }
 
 .form-control:focus {
@@ -683,7 +663,7 @@ textarea.form-control {
 label {
     display: inline-block;
     margin-bottom: .5rem;
-color: #001737;
+    color: #001737;
     font-family: 'IBM Plex Sans', sans-serif;
     font-size: 13px;
     font-weight: 500;
@@ -704,9 +684,8 @@ color: #001737;
 .card {
     margin-bottom: 20px;
     border: none;
-    box-shadow:0 0 10px 0 rgba(183, 192, 206, 0.2);
+    box-shadow: 0 0 10px 0 rgba(183, 192, 206, 0.2);
 }
-
 
 .card-header {
     border-color: #eff2f7;
@@ -715,7 +694,6 @@ color: #001737;
     font-weight: 600;
     color: #fff;
 }
-
 
 .btn-primary,
 .btn-primary.disabled,
@@ -744,6 +722,7 @@ color: #001737;
 .mobile_field .btn {
     margin-top: 11px;
 }
+
 
 /**************UPLOAD FILE CSS******************/
 
@@ -867,52 +846,47 @@ color: #001737;
 }
 
 .page-item .page-link {
- color: #000000;
+    color: #000000;
 }
-.page-item.active .page-link,.page-item .page-link:hover {
 
+.page-item.active .page-link,
+.page-item .page-link:hover {
     background-color: #ff6c60;
     border-color: #FF6C60;
     color: #fff;
 }
 
-.action-btn{
-display: flex;
-align-items: center;
-justify-content: center;
-flex-direction: column;
+.action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
-.action-btn .btn{
+.action-btn .btn {
     font-size: 11px;
     width: 100%;
     margin-bottom: 3px;
 }
 
-
-.sorting_1 a{
+.sorting_1 a {
     color: #FF6C60;
 }
 
-.model_list{
+.model_list {
     display: flex;
     align-items: flex-start;
 }
 
-
-.model_list .col-custom{
+.model_list .col-custom {
     flex: 0 0 20%;
 }
 
-
-.col-custom.active
-.header-car-info h3{
+.col-custom.active .header-car-info h3 {
     padding: 15px 20px;
-   
 }
 
-.col-custom
-.header-car-info h3{
+.col-custom .header-car-info h3 {
     padding: 5px 50px;
     border-bottom: 1px solid #f1f2f7;
     font-size: 12px;
@@ -923,10 +897,9 @@ flex-direction: column;
     height: 48px;
     display: flex;
     align-items: center;
-   
 }
 
-.cst-list li a{
+.cst-list li a {
     padding: 7px 15px;
     display: flex;
     align-items: center;
@@ -935,70 +908,70 @@ flex-direction: column;
     font-size: 13px;
     font-weight: 500;
 }
+
 .cst-list li {
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     border-bottom: 1px solid #f1f2f7;
 }
-.cst-list li:hover{
+
+.cst-list li:hover {
     background-color: #FF6C60;
-   
-}
-.cst-list li:hover a{
-     color: #fff;
-    
 }
 
-
-
-.year-listing li a{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    width:100%;
+.cst-list li:hover a {
+    color: #fff;
 }
 
-.more-shop{
-     display: flex;
+.year-listing li a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.more-shop {
+    display: flex;
     align-items: flex-start;
     justify-content: space-between;
     padding: 10px;
     border: 1px solid #ddd;
-    margin-bottom:15px;
+    margin-bottom: 15px;
 }
 
-.more-shop h4{
-    padding-right:10px;
-    flex:1;
-    font-weight:500;
+.more-shop h4 {
+    padding-right: 10px;
+    flex: 1;
+    font-weight: 500;
 }
 
-.shop_select{
-    box-shadow:0 5px 10px 0 rgba(183, 192, 206, 0.2);
+.shop_select {
+    box-shadow: 0 5px 10px 0 rgba(183, 192, 206, 0.2);
 }
 
-.shop_select a{
-    display:block;
-padding:9px 16px;
-    color:#001737;
+.shop_select a {
+    display: block;
+    padding: 9px 16px;
+    color: #001737;
     font-size: 13px;
     font-weight: 500;
-    border-bottom:1px solid #ddd;
-}
-.shop_select a:hover{
-    background:#ff766b;
-    color:#fff;
+    border-bottom: 1px solid #ddd;
 }
 
+.shop_select a:hover {
+    background: #ff766b;
+    color: #fff;
+}
 
 .font-large-1 {
     font-size: 2rem!important;
 }
+
 .blue-grey {
     color: #607D8B!important;
 }
+
 .text-bold-300 {
     font-weight: 300;
 }
@@ -1006,38 +979,50 @@ padding:9px 16px;
 .info {
     color: #3BAFDA!important;
 }
+
 .danger {
     color: #DA4453!important;
 }
+
 .success {
     color: #37BC9B!important;
 }
-.bg-success{
-   background-color: #37BC9B!important;
+
+.bg-success {
+    background-color: #37BC9B!important;
 }
+
 .warning {
     color: #F6BB42!important;
 }
+
 .border-right-blue-grey.border-right-lighten-5 {
     border-right: 1px solid #ECEFF1!important;
 }
 
-.text-body, .text-muted {
+.text-body,
+.text-muted {
     color: #55595C!important;
 }
-
-
 
 .font-large-2 {
     font-size: 3rem!important;
 }
 
-
-
-.total-pr{
-   display: flex;
+.total-pr {
+    display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 15px;
- 
+}
+
+.card-gray {
+    padding: 1.5rem;
+    background-color: #fdfdfd;
+    border: #f5f5f5 1px solid;
+}
+
+.ast-data-list li label {
+    font-weight: 600;
+    min-width: 80px;
 }
