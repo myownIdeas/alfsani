@@ -1,22 +1,17 @@
 @extends('include.layout')
 @section('content')
 
-
-
         <section class="sub-header">
             <div class="container-fluid">
                 <div class="subheader-main">
-                    <h2>Dashboard</h2>
-                    <div class="breadcrumb-link ml-3">
-                        <a href="#"><i class="far fa-envelope"></i> Order Listing</a>
-                    </div>
+                    <h2>Order Listing</h2>
                 </div>
             </div>
         </section>
         <div class="container-fluid">
             <div class="content-box">
                 <div class="cst-table-row">
-                <table id="example" class="table listing-table" style="width:100%">
+                <table id="example" class="table listing-table">
                     <thead>
                     <tr>
                         <th>Shop Name</th>
@@ -40,9 +35,9 @@
                     <td>{{$order->created_at}}</td>
                     <td>{{$order->myStatus->name}}</td>
                     <td>
-                        <a href="{{URL::to('order_detail/'.$order->id)}}">Detail</a>
+                        <a href="{{URL::to('order_detail/'.$order->id)}}" class="btn btn-success"><i class="fa fa-eye"></i></a>
                     @if($order->myStatus->id !=2)
-                        <a href="{{URL::to('order_update/'.$order->id)}}">Update</a>
+                        <a href="{{URL::to('order_update/'.$order->id)}}" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
                         @endif
                         {{--<a href="{{URL::to('order_finish/'.$order->id)}}">Finish</a>--}}
 

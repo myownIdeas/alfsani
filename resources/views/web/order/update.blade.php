@@ -3,39 +3,33 @@
 <section class="sub-header">
     <div class="container-fluid">
         <div class="subheader-main">
-            <h2>Dashboard</h2>
-            <div class="breadcrumb-link ml-3">
-                <a href="#"><i class="far fa-envelope"></i> Update Order</a>
-            </div>
+            <h2>Order</h2>
         </div>
     </div>
 </section>
 <div class="container-fluid">
     <div class="content-box">
-        <div style="margin-left:45%">
-            <b>Price</b>
-            <h1 id="top_price">{{$response['data']['order']->total_price}}</h1>
-
-        </div>
-
+        <h2 id="top_price" class="float-right">Price: {{$response['data']['order']->total_price}}</h2>
+        <h4 class="h4">Update Order</h4>
+        <hr>
         <form action="{{URL::to('place_order')}}" method="post">
 
             <input type="hidden" id="final_amount" name="final_amount" >
             <input type="hidden" id="orderId" value="{{$response['data']['order']->id}}" >
             <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
             <div class="form-group ">
-                <label for="">Bilty No</label>
+                <label>Bilty No</label>
                 <input type="text"  name="bilty_no" class="form-control">
             </div>
             <div class="form-group ">
-                <label for="">Cargo</label>
+                <label>Cargo</label>
                 <input type="text"  name="cargo" class="form-control">
             </div>
             <div id="more_order_list">
 
             @foreach($response['data']['orderDetail'] as $key=>$detail)
                 <div class="form-group">
-                    <label for="">Select Company</label>
+                    <label>Select Company</label>
 
                     <select name="company_id[]" onchange="getSubCategories(this.value,'sub_model{{$key}}')" id="company_id{{$key}}" class="form-control">
                         <option value="0">Please Select Parent Category</option>
@@ -47,7 +41,7 @@
 
                 <div class="row col-12">
 
-                    <label for="">Select First Model</label>
+                    <label>Select First Model</label>
                     <select name="model_id[]" onchange="getSubCategories(this.value,'sec_model{{$key}}')" id="sub_model{{$key}}" class="form-control">
                         <option value="0">Please Select Parent Category</option>
                         @foreach(\App\Http\Controllers\Web\OrderController::getCompanyDetail($detail->company_id) as $first)
@@ -57,7 +51,7 @@
                 </div>
                 <div class="row col-12">
 
-                    <label for="">Select Second Model</label>
+                    <label>Select Second Model</label>
                     <select name="second_model[]" onchange="getSubCategories(this.value,'third_model{{$key}}')" id="sec_model{{$key}}" class="form-control">
                         <option value="0">Please Select Parent Category</option>
                         @foreach( \App\Http\Controllers\Web\OrderController::getCompanyDetail($detail->first_model) as $second)
@@ -67,7 +61,7 @@
                 </div>
                 <div class="row col-12">
 
-                    <label for="">Select Third Model</label>
+                    <label>Select Third Model</label>
                     <select name="third_model[]" onchange="getSubCategories(this.value,'forth_model{{$key}}')" id="third_model{{$key}}" class="form-control">
                         <option value="0">Please Select Parent Category</option>
                         @foreach(\App\Http\Controllers\Web\OrderController::getCompanyDetail($detail->second_model) as $third)
@@ -76,7 +70,7 @@
                     </select>
                 </div>
                 <div class="col-12">
-                    <label for="">Search Item</label>
+                    <label>Search Item</label>
                     <input type="text"   class="form-control srchItem" onkeyup="searchItem(this.value,'{{$key}}','update')">
                     <div>
                         <br />

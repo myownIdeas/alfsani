@@ -4,17 +4,14 @@
 <section class="sub-header">
     <div class="container-fluid">
         <div class="subheader-main">
-            <h2>Dashboard</h2>
-            <div class="breadcrumb-link ml-3">
-                <a href="#"><i class="far fa-envelope"></i> Shop Listing</a>
-            </div>
+            <h2>Shop Listing</h2>
         </div>
     </div>
 </section>
 <div class="container-fluid">
     <div class="content-box">
         <div class="cst-table-row">    
-        <table id="example" class="table listing-table" style="width:100%">
+        <table id="example" class="table listing-table">
             <thead>
             <tr>
                 <th>Shop Name</th>
@@ -37,11 +34,9 @@
                 <td>{{$shope->work_type}}</td>
                 <td>
                     <div class="action-btn">
-                    <a class="btn btn-success" href="{{URL::to('edit_shop').'?shop_id='.$shope->id}}">Edit</a>
-
-                    <a class="btn btn-danger"href="{{URL::to('delete').'?shop_id='.$shope->id}}" onclick="return confirm('Are you sure?')">Delete</a>
-
-                    <a class="btn btn-info" href="{{URL::to('edit_shop').'?shop_id='.$shope->id}}">Update</a>
+                        <a class="btn btn-primary" href="{{URL::to('edit_shop').'?shop_id='.$shope->id}}"><i class="fas fa-pencil-alt"></i></a>
+                        <a class="btn btn-danger"href="{{URL::to('delete').'?shop_id='.$shope->id}}" onclick="return confirm('Are you sure?')"><i class="fas fa-trash"></i></a>
+                        <!-- <a class="btn-link text-info" href="{{URL::to('edit_shop').'?shop_id='.$shope->id}}">Update</a> -->
                     </div>
                 </td>
             </tr>

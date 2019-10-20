@@ -3,17 +3,14 @@
     <section class="sub-header">
             <div class="container-fluid">
                 <div class="subheader-main">
-                    <h2>Dashboard</h2>
-                    <div class="breadcrumb-link ml-3">
-                        <a href="#"><i class="far fa-envelope"></i> Stock Listing</a>
-                    </div>
+                    <h2>Stock Listing</h2>
                 </div>
             </div>
         </section>
         <div class="container-fluid">
             <div class="content-box">
                 <div class="cst-table-row">
-                <table id="example" class="table listing-table" style="width:100%">
+                <table id="example" class="table listing-table">
                     <thead>
                     <tr>
                         <th>shop Name</th>
@@ -42,8 +39,8 @@
                         <td>
                             
                             <div class="action-btn"> 
-                            <a href="{{URL::to('update/stock/'.$stock->id)}}" class="btn btn-info">Update</a>
-                            <a class="btn btn-danger" href="{{URL::to('delete/stock/'.$stock->id)}}" onclick="return confirm('Are you sure you want to delete this order?');">Delete</a>  </div> </td>
+                            <a href="{{URL::to('update/stock/'.$stock->id)}}" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
+                            <a class="btn btn-danger" href="{{URL::to('delete/stock/'.$stock->id)}}" onclick="return confirm('Are you sure you want to delete this order?');"><i class="fa fa-trash"></i></a>  </div> </td>
 
                     </tr>
                   @endforeach

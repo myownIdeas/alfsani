@@ -5,13 +5,39 @@
         <div class="container-fluid">
             <div class="subheader-main">
                 <h2>Dashboard</h2>
-                <div class="breadcrumb-link ml-3">
-                    <a href="#"><i class="fas fa-store-alt"></i> Dashboard</a>
-                </div>
             </div>
         </div>
     </section>
     <div class="container-fluid">
+        @foreach($response['data']['records'] as $reports)
+        <div class="row">
+            @foreach($reports as $key=>$report)
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-body">
+                            <div class="pb-1">
+                                <div class="total-pr">
+                                    <i class="far fa-star  font-large-1 blue-grey float-left mt-1"></i>
+                                    <span class="font-large-2 text-bold-300 info float-right">{{$report}}</span>
+                                </div>
+                                <div class="clearfix">
+                                    <span class="text-muted">{{$key}}</span>
+                                    {{--<span class="info float-right"><i class="ft-arrow-up info"></i> 2.89%</span>--}}
+                                </div>
+                            </div>
+                            <div class="progress mb-0" style="height: 7px;">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+        @endforeach
+
+        <?php /* 
         @foreach($response['data']['records'] as $reports)
     <div class="card">
     <div class="card-content">
@@ -42,6 +68,7 @@
     </div>
         <br />
         @endforeach
+        */?>
 </div>
 
 {{--<div class="row">
