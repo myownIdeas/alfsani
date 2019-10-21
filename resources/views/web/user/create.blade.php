@@ -6,34 +6,41 @@
             <section class="sub-header">
                 <div class="container-fluid">
                     <div class="subheader-main">
-                        <h2>Dashboard</h2>
-                        <div class="breadcrumb-link ml-3">
-                            <a href="#"><i class="far fa-envelope"></i> Add User</a>
-                        </div>
+                        <h2>User</h2>
                     </div>
                 </div>
             </section>
             <div class="container-fluid">
-                <div class="card">
-                    <div class="card-header">Add User</div>
-                    <div class="card-body">
+                
+                <div class="content-box">
+                    <h4 class="h4">Add User</h4>
+                    <hr>
                     {{Form::open(array('url'=> 'insert/user','method'=>'POST','enctype'=>"multipart/form-data"))}}
-                        <div class="form-group">
-                            <label for="">Add Name</label>
-                            <input type="text" name="name" class="form-control">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-4">
+                            <div class="form-group">
+                                <label for="">Add Name</label>
+                                <input type="text" name="name" class="form-control">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="">Add Email</label>
-                            <input type="text" name="email" class="form-control">
+                        <div class="col-md-12 col-lg-4">
+                            <div class="form-group">
+                                <label for="">Add Email</label>
+                                <input type="text" name="email" class="form-control">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="">Add Password</label>
-                            <input type="password" name="password" class="form-control">
+                        <div class="col-md-12 col-lg-4">
+                            <div class="form-group">
+                                <label for="">Add Password</label>
+                                <input type="password" name="password" class="form-control">
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">ADD User</button>
+                        <div class="col-md-12 text-right">
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                    </div>
                     {{Form::close()}}
                 </div>
-</div>
             </div>
 
 @endsection
