@@ -6,15 +6,14 @@
         <section class="sub-header">
             <div class="container-fluid">
                 <div class="subheader-main">
-                    <h2>Dashboard</h2>
-                    <div class="breadcrumb-link ml-3">
-                        <a href="#"><i class="far fa-envelope"></i> Deleted Listing</a>
-                    </div>
+                    <h2>Users</h2>
                 </div>
             </div>
         </section>
         <div class="container-fluid">
             <div class="content-box">
+                <h4 class="h4">Deleted Users</h4>
+                <hr>
                 <div class="cst-table-row">
                 <table id="example" class="table  listing-table" style="width:100%">
                     <thead>

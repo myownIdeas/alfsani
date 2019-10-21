@@ -6,23 +6,25 @@
             <section class="sub-header">
                 <div class="container-fluid">
                     <div class="subheader-main">
-                        <h2>Dashboard</h2>
-                        <div class="breadcrumb-link ml-3">
-                            <a href="#"><i class="far fa-envelope"></i> Add City</a>
-                        </div>
+                        <h2>City</h2>
                     </div>
                 </div>
             </section>
             <div class="container-fluid">
-                <div class="card">
-                    <div class="card-header">ADD CITY</div>
-                    <div class="card-body">
+                
+                
+                    <div class="content-box">
+                    <h4 class="h4">Add City</h4>
+                <hr>
                     {{Form::open(array('url'=> 'insert/city','method'=>'POST','enctype'=>"multipart/form-data"))}}
                         <div class="form-group">
-                            <label for="">Add City</label>
+                            <label for="">Type City Name</label>
                             <input type="text" name="city" class="form-control">
                         </div>
-                        <button type="submit" class="btn btn-primary">ADD CITY</button>
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                        
                     {{Form::close()}}
                 </div>
                 </div>

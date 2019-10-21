@@ -6,35 +6,44 @@
             <section class="sub-header">
                 <div class="container-fluid">
                     <div class="subheader-main">
-                        <h2>Dashboard</h2>
-                        <div class="breadcrumb-link ml-3">
-                            <a href="#"><i class="far fa-envelope"></i> Add Company</a>
-                        </div>
+                        <h2>Company</h2>
                     </div>
                 </div>
             </section>
             <div class="container-fluid">
                 {{Form::open(array('url'=> 'insert/company','method'=>'POST','enctype'=>"multipart/form-data"))}}
-                <div class="card">
-    <div class="card-header">Add Company</div>
-    <div class="card-body">
-                    <div class="form-group">
-                        <label for="">Parent Items</label>
-                        <select name="parent_category" class="form-control">
-                            <option value="0">Please Select Parent Category</option>
-                        @foreach($response['data']['categories'] as $category)
-                            <option value="{{$category->id}}">{{$category->name}}</option>
-                        @endforeach
-                        </select>
-                    </div>
-                        <div class="form-group">
-                            <label for="">Add Company</label>
-                            <input type="text" name="name" class="form-control">
+                
+                <div class="content-box">
+                    <h4 class="h4">Add Company</h4>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="">Parent Items</label>
+                                <select name="parent_category" class="form-control">
+                                    <option value="0">Please Select Parent Category</option>
+                                @foreach($response['data']['categories'] as $category)
+                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                @endforeach
+                                </select>
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">ADD Company</button>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="">Company Name</label>
+                                <input type="text" name="name" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 text-right">
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </div>
+                    </div>
+                    
+                        
+                        
                     {{Form::close()}}
                 </div>
-</div>
+
             </div>
 
 @endsection

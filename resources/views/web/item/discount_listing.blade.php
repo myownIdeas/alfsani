@@ -6,16 +6,16 @@
         <section class="sub-header">
             <div class="container-fluid">
                 <div class="subheader-main">
-                    <h2>Dashboard</h2>
-                    <div class="breadcrumb-link ml-3">
-                        <a href="#"><i class="far fa-envelope"></i> Items Listing</a>
-                    </div>
+                    <h2>Items</h2>
                 </div>
             </div>
         </section>
-        <div><a href="{{URL::to('add_item_discount')}}">Add Discount</a> </div>
+        
         <div class="container-fluid">
             <div class="content-box">
+                <a href="{{URL::to('add_item_discount')}}" class="btn btn-dark btn-sm float-right">Add Discount</a>
+                <h4 class="h4">Items Discount List</h4>
+                <hr>
                 <div class="cst-table-row">
                 <table id="example" class="table listing-table" style="width:100%">
                     <thead>

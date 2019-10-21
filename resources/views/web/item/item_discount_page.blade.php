@@ -6,78 +6,80 @@
     <section class="sub-header">
         <div class="container-fluid">
             <div class="subheader-main">
-                <h2>Dashboard</h2>
-                <div class="breadcrumb-link ml-3">
-                    <a href="#"><i class="far fa-envelope"></i> Item Discount Page</a>
-                </div>
+                <h2>Items</h2>
             </div>
         </div>
     </section>
     <div class="container-fluid">
         {{Form::open(array('url'=> 'insert/item/discount','method'=>'POST','enctype'=>"multipart/form-data"))}}
-        <div class="card">
-            <div class="card-header">Add Item Discount</div>
-            <div class="card-body">
-                <div class="form-group">
-                    <label for="">Select Shop</label>
-
-                    <select name="shop_id" id="shop_id"  class="form-control">
-                        <option value="0">Please Select Parent Category</option>
-                        @foreach($response['data']['shopes'] as $shop)
-                            <option value="{{$shop->id}}">{{$shop->name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="">Select Company</label>
-
-                    <select name="company_id" id="company_id" onchange="getSubCategories(this.value,'sub_model')" class="form-control">
-                        <option value="0">Please Select Parent Category</option>
-                        @foreach($response['data']['companies'] as $category)
-                            <option value="{{$category->id}}">{{$category->name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group">
-
-                    <label for="">Select First Model</label>
-                    <select name="model_id" onchange="getSubCategories(this.value,'sec_model')" id="sub_model" class="form-control">
-                    </select>
-
-
-                </div>
-                <div class="form-group row">
-
-                    <label for="">Select Second Model</label>
-                    <select name="model_id" onchange="getSubCategories(this.value,'third_model')" id="sec_model" class="form-control">
-                    </select>
-
-
-                </div>
-                <div class="form-group row">
-                    <label for="">Select Third Model</label>
-                    <select name="model_id" onchange="getSubCategories(this.value,'forth_model')" id="third_model" class="form-control">
-                    </select>
-                </div>
-                <div class="col-12">
-                    <label for="">Search Item</label>
-                    <input type="text" class="form-control srchItem" onkeyup="searchItemForDiscount(this.value,0)">
-                    <div>
-                        <ul id="appendItemsForDiscount">
-
-                        </ul>
-                    </div>
-                    <div>
-                        <ul id="add_more_itmes_discount">
-
-                        </ul>
+        <div class="content-box">
+            <h4 class="h4">Add Item Discount</h4>
+            <hr>
+            <div class="row">
+                <div class="col-md-6 col-lg-4">
+                    <div class="form-group">
+                        <label>Select Shop</label>
+                        <select name="shop_id" id="shop_id"  class="form-control">
+                            <option value="0">Please Select Parent Category</option>
+                            @foreach($response['data']['shopes'] as $shop)
+                                <option value="{{$shop->id}}">{{$shop->name}}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
-                <button type="submit" style="display:none" class="btn btn-primary submitbtn">ADD Item Discount</button>
+                <div class="col-md-6 col-lg-4">
+                    <div class="form-group">
+                        <label>Select Company</label>
+                        <select name="company_id" id="company_id" onchange="getSubCategories(this.value,'sub_model')" class="form-control">
+                            <option value="0">Please Select Parent Category</option>
+                            @foreach($response['data']['companies'] as $category)
+                                <option value="{{$category->id}}">{{$category->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="form-group">
+                        <label>Select First Model</label>
+                        <select name="model_id" onchange="getSubCategories(this.value,'sec_model')" id="sub_model" class="form-control">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="form-group">
+                        <label>Select Second Model</label>
+                        <select name="model_id" onchange="getSubCategories(this.value,'third_model')" id="sec_model" class="form-control">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="form-group">
+                        <label>Select Third Model</label>
+                        <select name="model_id" onchange="getSubCategories(this.value,'forth_model')" id="third_model" class="form-control">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="form-group">
+                        <label>Search Item</label>
+                        <input type="text" class="form-control srchItem" onkeyup="searchItemForDiscount(this.value,0)">
+                        <div class="form-group-dd">
+                            <ul id="appendItemsForDiscount">
 
-                {{Form::close()}}
+                            </ul>
+                            <ul id="add_more_itmes_discount">
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <button type="submit" style="display:none" class="btn btn-primary submitbtn">ADD Item Discount</button>
+                </div>
             </div>
+            
         </div>
+        {{Form::close()}}
     </div>
 
 @endsection
@@ -124,13 +126,13 @@
                     $('#appendItemsForDiscount').empty();
                     $('#add_more_itmes_discount').append(
                         '<div class="col-4">' +
-                        '<label for="">Item Name :</label>' +
+                        '<label>Item Name :</label>' +
                         '<span>' + name + '</span>' +
                         '<input type="hidden" required class="form-control" id="item_id" value="' + id + '" name="itemId[]">' +
                         '</div>' +
 
                         '<div class="col-4">' +
-                        '<label for="">Discount Price</label>' +
+                        '<label>Discount Price</label>' +
                         '<input type="text" name="item_discount[]" id="item_discount" required  class="form-control">' +
                         '</div>'
                     );

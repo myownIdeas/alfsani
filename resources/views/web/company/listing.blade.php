@@ -6,15 +6,14 @@
         <section class="sub-header">
             <div class="container-fluid">
                 <div class="subheader-main">
-                    <h2>Dashboard</h2>
-                    <div class="breadcrumb-link ml-3">
-                        <a href="#"><i class="far fa-envelope"></i> Company Listing</a>
-                    </div>
+                    <h2>Company</h2>
                 </div>
             </div>
         </section>
         <div class="container-fluid">
             <div class="content-box">
+                <h4 class="h4">Companies List</h4>
+                <hr>
                 <div class="cst-table-row">
                 <table id="example" class="table listing-table" style="width:100%">
                     <thead>
@@ -33,7 +32,7 @@
                         <td><a href="#" onclick="getSubModels({{$company->id}})">Sub Categories</a> </td>
                         <td>{{$company->created_at}}</td>
                         <td>
-                            <a class="btn btn-info" href="{{URL::to('edit_company').'?company_id='.$company->id}}">Update</a>
+                            <a class="btn btn-primary btn-sm" href="{{URL::to('edit_company').'?company_id='.$company->id}}"><i class="fas fa-pencil-alt"></i></a>
                            {{-- <a class="btn btn-info"href="{{URL::to('delete_item').'?item_id='.$item->id}}" onclick="return confirm('Are you sure?')">Update</a>--}}
 
                         </td>

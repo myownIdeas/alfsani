@@ -6,15 +6,14 @@
         <section class="sub-header">
             <div class="container-fluid">
                 <div class="subheader-main">
-                    <h2>Dashboard</h2>
-                    <div class="breadcrumb-link ml-3">
-                        <a href="#"><i class="far fa-envelope"></i> Group Listing</a>
-                    </div>
-                </div>
+                    <h2>Group</h2>
+                 </div>
             </div>
         </section>
         <div class="container-fluid">
             <div class="content-box">
+                <h4 class="h4">Group Listing</h4>
+                <hr>
                 <div class="cst-table-row">
                 <table id="example" class="table listing-table" style="width:100%">
                     <thead>
@@ -23,6 +22,7 @@
                         <th>Group Creater</th>
                         <th>Group For</th>
                         <th>Time</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -32,6 +32,7 @@
                         <td>{{$group->owner->name}}</td>
                         <td>{{$group->userFor->name}}</td>
                         <td>{{$group->created_at}}</td>
+                        <td><a href="{{URL::to('group_detail').'?group_id='.$group->id}}" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a></td>
                     </tr>
                   @endforeach
 
