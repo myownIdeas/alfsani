@@ -8,6 +8,7 @@ use App\Http\Response\Response\WebResponse;
 use App\Order;
 use App\Company;
 use App\OrderDetail;
+use App\Status;
 use App\Stock;
 use Illuminate\Http\Request as Request;
 use Illuminate\Support\Facades\DB;
@@ -48,6 +49,7 @@ class OrderController  extends Controller
 
         return $this->response->setView("web.order.detail")->respond(["data"=>[
             'orderDetail'=>$orderDetail,
+            'orderStatus'=>Status::all(),
             'order'=>$order
         ]]);
     }
@@ -189,6 +191,20 @@ class OrderController  extends Controller
 
         return Redirect::back();
 
+    }
+
+    public function addOrderAmount(Request  $request){
+        $user =  $request->session()->get('user');
+        $record = ['order_id'=>$request->orderId,'amount'=>$request->amount,'created_by'=>$user->id];
+        DB::table('order_payment_detail')->insert($record);
+        return json_encode(['res'=>true]);
+
+    }
+    public function changeOrderStatus(Request  $request){
+            $order = Order::where('id',$request->orderId)->first();
+            $order->status = $request->statusId;
+            $order->save();
+            return json_encode(['res'=>true]);
     }
 
 }

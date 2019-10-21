@@ -23,6 +23,23 @@ Route::get('/',
             ],
         'uses'=>'HomeController@index',
     ]
+);Route::get('addOrderAmount',
+    [
+        'middleware'=>
+            [
+               // 'webValidate:forgetPasswordRequest'
+            ],
+        'uses'=>'OrderController@addOrderAmount',
+    ]
+);
+Route::get('changeStatus',
+    [
+        'middleware'=>
+            [
+                // 'webValidate:forgetPasswordRequest'
+            ],
+        'uses'=>'OrderController@changeOrderStatus',
+    ]
 );
 Route::get('/dashboard',
     [

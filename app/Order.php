@@ -23,4 +23,7 @@ class Order extends Model
     public function agent(){
         return $this->belongsTo('App\User','agent_id');
     }
+    public function payments(){
+        return $this->hasMany('App\Payments','order_id');
+    }
 }
