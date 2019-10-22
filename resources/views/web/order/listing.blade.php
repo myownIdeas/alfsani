@@ -35,9 +35,9 @@
                     <td>{{$order->created_at}}</td>
                     <td>{{$order->myStatus->name}}</td>
                     <td>
-                        <a href="{{URL::to('order_detail/'.$order->id)}}" class="btn btn-success"><i class="fa fa-eye"></i></a>
+                        <a href="{{URL::to('order_detail/'.$order->id)}}" class="btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
                     @if($order->myStatus->id !=2)
-                        <a href="{{URL::to('order_update/'.$order->id)}}" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
+                        <a href="{{URL::to('order_update/'.$order->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></a>
                         @endif
                         {{--<a href="{{URL::to('order_finish/'.$order->id)}}">Finish</a>--}}
 

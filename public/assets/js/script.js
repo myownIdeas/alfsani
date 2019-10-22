@@ -321,14 +321,18 @@ function validation(appendWhere) {
 
 function appendMoreItem() {
     $('#add_more_itmes').append(
-        '<div class="col-6">' + '<div class="form-group">' +
+        '<div class="row">' +
+        '<div class="col-col-md-6">' +
+        '<div class="form-group">' +
         '<label>Add Item</label>' +
         '<input type="text" required class="form-control" name="itemName[]">' +
-        '</div>' + '</div>' +
-
-        '<div class="col-6">' + '<div class="form-group">' +
+        '</div>' +
+        '</div>' +
+        '<div class="col-col-md-6">' +
+        '<div class="form-group">' +
         '<label>Per Peace Price</label>' +
         '<input type="number" required class="form-control" name="itemPrice[]">' +
+        '</div>' +
         '</div>' +
         '</div>'
     )
@@ -468,26 +472,37 @@ function addItemInOrder(id, name, price, index, model, condition = null) {
     var myindx = $('.price').length;
 
     $('#add_more_itmes' + index).append(
-        '<div class="col-4">' +
+        '<div class="bg-white px-4 pt-4 pb-2 border mb-2">' +
+        '<div class="row">' +
+        '<div class="col-col-md-6 col-lg-3">' +
+        '<div class="form-group">' +
         '<label>Add Item</label>' +
         '<input type="text" required class="form-control" value="' + name + '" name="itemName[]">' +
         '<input type="hidden" required class="form-control" id="item_id' + index + '" value="' + id + '" name="itemId[][' + index + ']">' +
         '</div>' +
-
-        '<div class="col-4">' +
+        '</div>' +
+        '<div class="col-col-md-6 col-lg-3">' +
+        '<div class="form-group">' +
         '<label>Manufactured By</label>' +
         '<input type="text" name="item_type[]" id="item_type' + index + '" required  class="form-control">' +
         '</div>' +
-        '<div class="col-4">' +
+        '</div>' +
+        '<div class="col-col-md-6 col-lg-3">' +
+        '<div class="form-group">' +
         '<label>Piece</label>' +
         '<select name="item_set[]" id="set_pack' + index + '" required class="form-control">' +
         '<option value="peace">Peace</option>' +
         '<option value="set">Set</option>' +
         '</select>' +
         '</div>' +
-        '<div class="col-4">' +
+        '</div>' +
+        '<div class="col-col-md-6 col-lg-3">' +
+        '<div class="form-group">' +
         '<label>Quantity</label>' +
         '<input type="text" name="quantity[]" id="qty' + index + '" required onchange="calculatePrice(' + price + ',this.value,' + index + ',' + "'" + condition + "'" + ')" class="form-control">' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
         '</div>' +
         '<input type="hidden" value="" name="totalPrice[]" class="price" id="price' + myindx + '">' +
         '<input type="hidden" value="" name="linePrice[]"  id="linePrice' + index + '">'
@@ -594,6 +609,9 @@ function updateOrderHtml(optionList, condition) {
     $('#more_order_list').append(
 
 
+        '<div class="card-gray pb-2 mb-3">' +
+        '<div class="row">' +
+        '<div class="col-md-6 col-lg-4">' +
         '<div class="form-group">' +
         '<label>Select Company</label>' +
         '<select name="company_id[]" id="company_id' + counter + '" onchange="getSubCategories(this.value,' + "'" + 'sub_model' + counter + "'" + ')" class="form-control">' +
@@ -602,36 +620,46 @@ function updateOrderHtml(optionList, condition) {
 
         '</select>' +
         '</div>' +
-        '<div class="row col-12">' +
+        '</div>' +
+        '<div class="col-md-6 col-lg-4">' +
+        '<div class="form-group">' +
 
         '<label>Select First Model</label>' +
         '<select name="model_id[]" onchange="getSubCategories(this.value,' + "'" + 'sec_model' + counter + "'" + ')" id="sub_model' + counter + '" class="form-control">' +
         '</select>' +
         '</div>' +
-        '<div class="row col-12">' +
+        '</div>' +
+        '<div class="col-md-6 col-lg-4">' +
+        '<div class="form-group">' +
 
         '<label>Select Second Model</label>' +
         '<select name="second_model[]" onchange="getSubCategories(this.value,' + "'" + 'third_model' + counter + "'" + ')" id="sec_model' + counter + '" class="form-control">' +
         '</select>' +
         '</div>' +
-        '<div class="row col-12">' +
+        '</div>' +
+        '<div class="col-md-6 col-lg-4">' +
+        '<div class="form-group">' +
         '<label>Select Third Model</label>' +
         '<select name="third_model[]" onchange="getSubCategories(this.value)" id="third_model' + counter + '" class="form-control">' +
         '</select>' +
         '</div>' +
-        '<div class="col-12">' +
+        '</div>' +
+        '<div class="col-md-6 col-lg-4">' +
+        '<div class="form-group">' +
         '<label>Search Item</label>' +
         '<input type="text" required class="form-control" onkeyup="searchItem(this.value,' + counter + ',' + "'" + condition + "'" + ')">' +
-        '<div>' +
-        '<ul id="appendItemsHere' + counter + '">' +
-
+        '<div class="form-group-dd">' +
+        '<ul class="shop_select" id="appendItemsHere' + counter + '">' +
         '</ul>' +
         '</div>' +
         '</div>' +
-        '<div class="row col-12" id="add_more_itmes' + counter + '">' +
         '</div>' +
-        '<br />' +
-        '<br />'
+        '<div class="col-md-12">' +
+        '<div class="" id="add_more_itmes' + counter + '">' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>'
     )
     counter++;
 }
@@ -641,44 +669,57 @@ function appendOrderHtml(optionList) {
     $('#more_order_list').append(
 
 
+        '<div class="card-gray mb-3 pb-2">' +
+        '<div class="row">' +
+        '<div class="col-md-6 col-lg-4">' +
         '<div class="form-group">' +
-        '<label>Select Company</label>' +
+
+        '<label>Select Companyd</label>' +
         '<select name="company_id[]" onchange="getSubCategories(this.value,' + "'" + 'sub_model' + counter + "'" + ')" class="form-control">' +
         '<option value="0">Please Select Parent Category</option>' +
         optionList +
 
         '</select>' +
         '</div>' +
-        '<div class="row col-12">' +
+        '</div>' +
+        '<div class="col-md-6 col-lg-4">' +
+        '<div class="form-group">' +
 
         '<label>Select First Model</label>' +
         '<select name="model_id[]" onchange="getSubCategories(this.value,' + "'" + 'sec_model' + counter + "'" + ')" id="sub_model' + counter + '" class="form-control">' +
         '</select>' +
         '</div>' +
-        '<div class="row col-12">' +
+        '</div>' +
+        '<div class="col-md-6 col-lg-4">' +
+        '<div class="form-group">' +
 
         '<label>Select Second Model</label>' +
         '<select name="second_model[]" onchange="getSubCategories(this.value,' + "'" + 'third_model' + counter + "'" + ')" id="sec_model' + counter + '" class="form-control">' +
         '</select>' +
         '</div>' +
-        '<div class="row col-12">' +
+        '</div>' +
+        '<div class="col-md-6 col-lg-4">' +
+        '<div class="form-group">' +
         '<label>Select Third Model</label>' +
         '<select name="third_model[]" onchange="getSubCategories(this.value)" id="third_model' + counter + '" class="form-control">' +
         '</select>' +
         '</div>' +
-        '<div class="col-12">' +
+        '</div>' +
+        '<div class="col-md-6 col-lg-4">' +
+        '<div class="form-group">' +
         '<label>Search Item</label>' +
         '<input type="text" required class="form-control" onkeyup="searchItem(this.value,' + counter + ')">' +
-        '<div>' +
-        '<ul id="appendItemsHere' + counter + '">' +
-
+        '<div class="form-group-dd">' +
+        '<ul class="shop_select" id="appendItemsHere' + counter + '">' +
         '</ul>' +
         '</div>' +
         '</div>' +
-        '<div class="row col-12" id="add_more_itmes' + counter + '">' +
         '</div>' +
-        '<br />' +
-        '<br />'
+        '<div class="col-md-12">' +
+        '<div class="" id="add_more_itmes' + counter + '">' +
+        '</div>' +
+        '</div>' +
+        '</div>'
     )
     counter++;
 }
