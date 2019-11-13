@@ -31,7 +31,7 @@
                         <td>{{$group->owner->name}}</td>
                         <td>{{$group->userFor->name}}</td>
                         <td>{{$group->created_at}}</td>
-                        <td><a class="btn btn-primary" href="{{URL::to('edit_group_detail').'?edit_group_id='.$group->id}}"><i class="fas fa-pencil-alt"></i></a></td>
+                        <td><a class="btn btn-primary btn-sm" href="{{URL::to('edit_group_detail').'?edit_group_id='.$group->id}}"><i class="fas fa-pencil-alt"></i></a></td>
                     </tr>
                   @endforeach
 

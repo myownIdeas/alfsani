@@ -1041,3 +1041,7 @@ label {
     font-weight: 600;
     min-width: 80px;
 }
+
+.header-right {
+    font-size: 12px;
+}

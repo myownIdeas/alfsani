@@ -29,6 +29,19 @@
                     <i class="fa fa-bars"></i>
                 </button-->
                  <a class="brand_name mr-auto" href="#">Alif SANI <span> TRADERS</span></a>
+
+                 <div class="header-right">
+                    <div class="dropdown ml-auto">
+                        <a href="" class="text-primary p-2" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Welcome, Admin <i class="fa fa-angle-down"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>
+                 </div>
             
 
         <div class="collapse navbar-collapse cst-nav" id="navbarSupportedContent">
