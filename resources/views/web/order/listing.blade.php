@@ -32,7 +32,7 @@
                     <td>{{$order->agent->name}}</td>
                     <td>{{$order->total_price}}</td>
                     <td>{{$order->after_discount}}</td>
-                    <td>{{$order->created_at}}</td>
+                    <td>{{$order->order_date}}</td>
                     <td>{{$order->myStatus->name}}</td>
                     <td>
                         <a href="{{URL::to('order_detail/'.$order->id)}}" class="btn btn-success"><i class="fa fa-eye"></i></a>

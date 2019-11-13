@@ -14,15 +14,16 @@
         </div>
     </section>
     <div class="container-fluid">
-        {{Form::open(array('url'=> 'insert/stock','method'=>'POST','enctype'=>"multipart/form-data"))}}
+        {{Form::open(array('url'=> 'update/stock/Quantity','method'=>'POST','enctype'=>"multipart/form-data"))}}
         <div class="card">
-            <div class="card-header">ADD STOCKS</div>
+            <input type="hidden" name="stock_id" value="{{$response['data']['stock']->id}}">
+            <div class="card-header">Update STOCKS</div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label for="">Select User</label>
-                            <select name="shop" id="" required class="form-control">
+                            <select name="shop" id=""  required class="form-control">
                                 @foreach($response['data']['shoppes'] as $shop)
                                     <option value="{{$shop->id}}" @if($shop->id == $response['data']['stock']->shop_id) selected @endif>{{$shop->name}}</option>
                                 @endforeach
@@ -68,23 +69,35 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-lg-6">    <div class="form-group">
-                            <label for="">Search Item</label>
-                            <input type="text" class="form-control srchItem" onkeyup="searchItem(this.value,0)">
-                        </div>
 
-                    </div>
-
-                </div>
-                <ul id="appendItemsHere0">
-
-                </ul>
-                <ul>
                     @foreach($response['data']['items'] as $item)
-                    <li>{{$item}}</li>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="">Item Name</label>
+                                <input type="text" class="form-control" readonly name="item_name" value="{{$item['name']}}">
+                            </div>
+                        </div>
                     @endforeach
-                </ul>
-                <button type="submit" class="btn btn-primary">ADD Stock</button>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="">Quantity</label>
+                            <input type="text" class="form-control" name="quantity" value="{{$response['data']['stock']->qty}}">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">    <div class="form-group"> <label for="">Select Third Model</label>
+                            <select name="item_set" class="form-control">
+                                <option value="peace">Peace</option>
+                                <option value="set">Set</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <button type="submit" class="btn btn-primary">Update Stock</button>
             </div>
 
 

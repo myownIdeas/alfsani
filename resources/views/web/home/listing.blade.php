@@ -20,6 +20,7 @@
                 <th>Phone Number</th>
                 <th>City</th>
                 <th>Work Type</th>
+                <th>Society</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -32,6 +33,7 @@
                 <td>{{$shope->mobile}}</td>
                 <td>{{$shope->city->name}}</td>
                 <td>{{$shope->work_type}}</td>
+                <td>{{$shope->society_name}}</td>
                 <td>
                     <div class="action-btn">
                         <a class="btn btn-primary" href="{{URL::to('edit_shop').'?shop_id='.$shope->id}}"><i class="fas fa-pencil-alt"></i></a>

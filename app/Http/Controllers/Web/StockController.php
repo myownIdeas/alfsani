@@ -67,8 +67,17 @@ class StockController  extends Controller
         ]]);
     }
 
+    public function updateStockQuantity(Requestt $request){
+       $stock = Stock::where('id',$request->stock_id)->first();
+       $stock->shop_id = $request->shop;
+       $stock->qty = $request->quantity;
+       $stock->item_set = $request->item_set;
+       $stock->save();
+       return Redirect::back();
+    }
     public function updateStock($sotockId){
         $stock = Stock::where('id',$sotockId)->first();
+
         return $this->response->setView("web.stock.update")->respond(["data"=>[
             'shoppes'=>ShopeCenter::all(),
             'companies'=>Company::where('parent_category',0)->get(),
@@ -87,6 +96,6 @@ class StockController  extends Controller
                 'name'=>$record->item
             ];
         }
-        dd($items);
+        return $items;
     }
 }

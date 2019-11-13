@@ -41,15 +41,26 @@
             <table class="table listing-table mt-4">
                 <thead>
                     <tr>
-                        <th colspan="3" class="font-weight-bold">Manage Shops</th>
+                        <td colspan="3" class="font-weight-bold">Manage Shops</td>
+
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($response['data']['group']->groupDetail as $detail)
+                @foreach($response['data']['group']->groupDetail as $key=>$detail)
                     <tr>
-                        <td>{{$detail->getShop->name}}</td>
-                        <td>{{$detail->getShop->mobile}}</td>
-                        <td class="text-center"><a href="{{URL::to('/get_order_page?shop_id='.$detail->getShop->id.'&group_id='.$response['data']['group']->id)}}" class="btn btn-info btn-sm">Make Order</a></td>
+                        <th>{{$detail->getShop->name}}</th>
+                        <th>{{$detail->getShop->mobile}}</th>
+                        <th id="th_id{{$key}}">
+                            <a href="javascript:void(0)" onclick="showReminderText({{$key}})">Reminder</a>
+                        <div id="main{{$key}}" style="display: none">
+                        <input type="text" name="reminder" id="reminder{{$key}}" >
+                        <a href="javascript:void(0)" onclick="updateReminder({{$key}},{{$detail->getShop->id}})">Update</a>
+                        </div>
+                        </th>
+                        <th>
+                            {{$detail->getShop->reminder}}
+                        </th>
+                        <th class="text-center"><a href="{{URL::to('/get_order_page?shop_id='.$detail->getShop->id.'&group_id='.$response['data']['group']->id)}}" class="btn btn-info btn-sm">Make Order</a></th>
                     </tr>
                 @endforeach
                 </tbody>
@@ -58,6 +69,26 @@
         </div>
 
     </div>
+<script>
+    function showReminderText(id) {
+        $('#main'+id).show();
+    }
+    function updateReminder(id,shopId) {
+        var reminder = $('#reminder'+id).val();
+        $.ajax({
 
+            type: 'GET',
+
+            url: url + '/updateReminderForShop',
+
+            data: {reminder:reminder,shopId:shopId},
+
+            success: function(data) {
+                $('#main'+id).hide();
+                $('#th_id'+id).text(reminder);
+            }
+        });
+    }
+</script>
 
 @endsection

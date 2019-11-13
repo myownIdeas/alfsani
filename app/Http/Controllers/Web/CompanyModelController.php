@@ -140,7 +140,15 @@ class CompanyModelController  extends Controller
             ->leftjoin('company as f_model', 'f_model.id', '=', 'company_item.first_model')
             ->leftjoin('company as s_model', 's_model.id', '=', 'company_item.second_model')
             ->leftjoin('company as t_model', 't_model.id', '=', 'company_item.third_model')
-            ->select('company_item.purchase_price','company_item.price','company_item.third_model','company_item.company_id','company.name', 'company_item.*','f_model.name as fName','s_model.name as sName','t_model.name as tName')
+            ->select('company_item.purchase_price',
+                'company_item.price',
+                'company_item.third_model',
+                'company_item.company_id',
+                'company.name',
+                'company_item.*',
+                'f_model.name as fName',
+                's_model.name as sName',
+                't_model.name as tName')
             ->groupBy('company_item.third_model')
             ->get();
 
@@ -164,6 +172,7 @@ class CompanyModelController  extends Controller
                 'f_model.name as fName',
                 'shopes.name as shopName',
                 's_model.name as sName',
+                'item_discount.id as itemId',
                 'company_item.item as itemName',
                 't_model.name as tName')
             ->get();
@@ -171,6 +180,16 @@ class CompanyModelController  extends Controller
         return $this->response->setView("web.item.discount_listing")->respond(["data"=>[
             'modelWithItems'=>$modelWithItems
         ]]);
+    }
+
+    public function editItemDiscount(Requestt $request){
+           $discount = DB::table('item_discount')->where('id',$request->id)->update([
+               'discount_rate' =>  $request->discountRate,
+           ]);
+
+
+           return 'true';
+
     }
     public function itemDiscountPage(){
         return $this->response->setView("web.item.item_discount_page")->respond(["data"=>[

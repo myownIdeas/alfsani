@@ -42,6 +42,42 @@
                         <div class="col-sm-12">
                             <div class="more_mobile"></div>
                         </div>
+
+                        <div class="mobile_field card-gray mb-4">
+                            @foreach($response['data']['shop']->shopDetailContent as $contact)
+                            <div class="row">
+                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                    <div class="form-group">
+                                        <label>Person Name</label>
+                                        <input type="text" name="ext_name[]" value="{{$contact->name}}" required class="form-control">
+                                        </div>
+                                    </div>
+                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                    <div class="form-group">
+                                        <label>Mobile</label>
+                                        <input type="text" name="ext_mobile[]" value="{{$contact->mobile}}" required class="form-control">
+                                        </div></div>
+                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                    <div class="form-group">
+                                        <label>WhatApp</label>
+                                        <input type="text" name="ext_whats_app[]" value="{{$contact->what_app}}" required class="form-control">
+                                        </div></div>
+                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="email" name="ext_email[]" value="{{$contact->email}}" required class="form-control">
+                                        </div>
+                                </div>
+                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                    <div class="form-group">
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-danger" onclick="deleteContact({{$contact->id}})">Delete</a>
+                                    </div>
+                                </div>
+
+                                </div>
+                            @endforeach
+                            </div>
+
                         <div class="col-sm-12 text-right">
                             <div class="add-more mb-3">
                                 <a href="#" class="btn btn-primary more_info">Add More Person</a>

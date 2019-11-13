@@ -28,7 +28,7 @@
                         <th>Items </th>
                         <th>Discount</th>
                         <th>Date</th>
-                        <th>Action</th>
+                        {{--<th>Action</th>--}}
 
                     </tr>
                     </thead>
@@ -42,9 +42,16 @@
                         <td>{{$modelItem->sName}} </td>
                         <td>{{$modelItem->tName}} </td>
                         <td>{{$modelItem->itemName}} </td>
-                        <td>{{$modelItem->discount_rate}} </td>
+                        <td id="newDiscount{{$modelItem->itemId}}">
+                            {{$modelItem->discount_rate}}
+                            <a href="javascript:void(0)" onclick="showTextBox({{$modelItem->itemId}})">Edit Discount</a>
+                            <div id="showModel{{$modelItem->itemId}}" style="display: none">
+                            <input type="text" id="discount{{$modelItem->itemId}}"   >
+                            <a href="javascript:void(0)" onclick="updateDiscount({{$modelItem->itemId}})">Submit</a>
+                            </div>
+                        </td>
                         <td>{{$modelItem->created_at}}</td>
-                        <td><a href="{{URL::to('edit_discount_item/')}}">Edit</a> </td>
+                        {{--<td><a href="{{URL::to('edit_discount_item/'.$modelItem->itemId.'')}}">Edit</a> </td>--}}
 
                     </tr>
                   @endforeach
@@ -75,6 +82,30 @@
                 </div>
             </div>
         </div>
+<script>
+    function updateDiscount(discountId) {
+        var discountRate = $('#discount'+discountId).val();
+        $.ajax({
 
+            type: 'GET',
+
+            url: url + '/edit_discount_item',
+
+            data: { id: discountId ,discountRate:discountRate},
+
+            success: function(data) {
+                if(data == 'true'){
+                    $('#showModel'+discountId).hide();
+                    $('#newDiscount'+discountId).text(discountRate);
+
+                }
+
+            }
+        });
+    }
+    function showTextBox(id) {
+        $('#showModel'+id).show();
+    }
+</script>
 
 @endsection

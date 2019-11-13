@@ -80,7 +80,22 @@ $(document).ready(function() {
     });
 
 });
+function deleteContact(id) {
 
+    $.ajax({
+
+        type: 'GET',
+
+        url: url + '/deleteContactForShop',
+
+        data: { id: id },
+
+        success: function(data) {
+
+           window.location.reload();
+        }
+    });
+}
 function getSubCategories(itemId, append_where) {
 
     $.ajax({

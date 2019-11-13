@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{url('/')}}/assets/css/style.css">
     
     <link rel="stylesheet" href="{{url('/')}}/assets/css/responsive.css">
+
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
@@ -30,17 +31,17 @@
                  <a class="brand_name mr-auto" href="#">Alif SANI <span> TRADERS</span></a>
             
 
-            <!--<div class="collapse navbar-collapse cst-nav" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse cst-nav" id="navbarSupportedContent">
                     <ul class="nav navbar-nav ml-auto">
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Register</a>
+                            <a class="nav-link" href="{{URL::to('logout')}}">Logout</a>
                         </li>
-                        <li class="nav-item">
+                        {{--<li class="nav-item">
                             <a class="nav-link" href="login.html">Login</a>
-                        </li>
+                        </li>--}}
                     </ul>
-                </div>-->
+                </div>
             </div>
         </nav>
 <div class="wrapper">

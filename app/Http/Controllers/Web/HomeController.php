@@ -40,6 +40,11 @@ class HomeController  extends Controller
     public function getShopForAjax(){
 
     }
+    public function deleteContactForShop(Request $request){
+        $shop = ShopDetailContext::where('id',$request->id)->first();
+        $shop->delete();
+        return 'true';
+    }
     public function addShop()
     {
 

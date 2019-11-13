@@ -186,5 +186,11 @@ class GroupController  extends Controller
         }
         return json_encode($final);
     }
+    public function updateReminderForShop(Requestt $request){
+        $shop = ShopeCenter::where('id',$request->shopId)->first();
+        $shop->reminder = $request->reminder;
+        $shop->save();
+        return 'true';
+    }
 
 }

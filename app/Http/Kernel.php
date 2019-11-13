@@ -54,6 +54,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
 
         'ApiValidator' => \App\Http\Middleware\Validator\ApiValidator::class,
+        'webAuthenticate' => \App\Http\Middleware\Authenticator\WebAuthenticator::class,
 
     ];
 }

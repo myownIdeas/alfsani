@@ -19,33 +19,64 @@ Route::get('/',
     [
         'middleware'=>
             [
-               // 'webValidate:forgetPasswordRequest'
+                //'webAuthenticate'
             ],
         'uses'=>'HomeController@index',
     ]
-);Route::get('addOrderAmount',
+);
+Route::post('auth/user',
     [
         'middleware'=>
             [
-               // 'webValidate:forgetPasswordRequest'
+                //'webAuthenticate'
+            ],
+        'uses'=>'HomeController@validateUser',
+    ]
+);
+
+Route::get('addOrderAmount',
+    [
+        'middleware'=>
+            [
+              'webAuthenticate'
             ],
         'uses'=>'OrderController@addOrderAmount',
+    ]
+);
+
+Route::get('deleteContactForShop',
+    [
+        'middleware'=>
+            [
+               'webAuthenticate'
+            ],
+        'uses'=>'HomeController@deleteContactForShop',
     ]
 );
 Route::get('changeStatus',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               //'webAuthenticate'
             ],
         'uses'=>'OrderController@changeOrderStatus',
+    ]
+);
+
+Route::get('assignOrderTo',
+    [
+        'middleware'=>
+            [
+               //'webAuthenticate'
+            ],
+        'uses'=>'OrderController@assignOrderTo',
     ]
 );
 Route::get('/dashboard',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'DashboardController@index',
     ]
@@ -54,29 +85,30 @@ Route::get('add/shop',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'HomeController@addShop',
     ]
 );
 
-Route::post('auth/user',
-    [
-        'middleware'=>
-            [
-                // 'webValidate:forgetPasswordRequest'
-            ],
-        'uses'=>'HomeController@validateUser',
-    ]
-);
+
 
 Route::post('insert/shop',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'HomeController@create',
+    ]
+);
+Route::get('updateReminderForShop',
+    [
+        'middleware'=>
+            [
+               'webAuthenticate'
+            ],
+        'uses'=>'GroupController@updateReminderForShop',
     ]
 );
 
@@ -84,7 +116,7 @@ Route::get('edit_shop',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'HomeController@edit',
     ]
@@ -94,7 +126,7 @@ Route::get('get_shop_for_ajax',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'HomeController@getShopForAjax',
     ]
@@ -104,7 +136,7 @@ Route::post('update_shop',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'HomeController@update',
     ]
@@ -114,7 +146,7 @@ Route::get('delete',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'HomeController@delete',
     ]
@@ -124,7 +156,7 @@ Route::get('shop/listing',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'HomeController@listingPage',
     ]
@@ -133,7 +165,7 @@ Route::get('add/city',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'CityController@index',
     ]
@@ -143,7 +175,7 @@ Route::post('insert/city',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'CityController@create',
     ]
@@ -153,7 +185,7 @@ Route::get('city/listing',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'CityController@listingPage',
     ]
@@ -163,7 +195,7 @@ Route::get('edit_city',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'CityController@edit',
     ]
@@ -173,7 +205,7 @@ Route::post('update_city',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'CityController@update',
     ]
@@ -183,7 +215,7 @@ Route::get('delete_city',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'CityController@delete',
     ]
@@ -195,7 +227,7 @@ Route::post('insert/city',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'CityController@create',
     ]
@@ -205,7 +237,7 @@ Route::get('city/listing',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'CityController@listingPage',
     ]
@@ -215,7 +247,7 @@ Route::get('edit_city',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'CityController@edit',
     ]
@@ -225,7 +257,7 @@ Route::post('update_city',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'CityController@update',
     ]
@@ -235,7 +267,7 @@ Route::get('delete_city',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'CityController@delete',
     ]
@@ -249,7 +281,7 @@ Route::get('add/company',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'CompanyController@index',
     ]
@@ -259,7 +291,7 @@ Route::post('insert/company',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'CompanyController@create',
     ]
@@ -270,7 +302,7 @@ Route::get('company/listing',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'CompanyController@listingPage',
     ]
@@ -279,7 +311,7 @@ Route::get('subCat_listing',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'CompanyController@subCategoryList',
     ]
@@ -290,7 +322,7 @@ Route::get('insert_model',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'CompanyController@insertModels',
     ]
@@ -302,7 +334,7 @@ Route::get('edit_company',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'CompanyController@edit',
     ]
@@ -312,7 +344,7 @@ Route::post('update_company',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'CompanyController@update',
     ]
@@ -322,7 +354,7 @@ Route::get('delete_company',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'CompanyController@delete',
     ]
@@ -347,7 +379,7 @@ Route::get('add/company/model',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'CompanyModelController@index',
     ]
@@ -357,7 +389,7 @@ Route::post('insert/company/model',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'CompanyModelController@create',
     ]
@@ -368,7 +400,7 @@ Route::get('company/listing/model',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'CompanyModelController@listingPage',
     ]
@@ -378,7 +410,7 @@ Route::get('updateModelItems',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'CompanyModelController@updateModelItems',
     ]
@@ -387,7 +419,7 @@ Route::get('get_items',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'CompanyModelController@getModelItems',
     ]
@@ -396,7 +428,7 @@ Route::get('edit_company_model',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'CompanyController@edit',
     ]
@@ -406,7 +438,7 @@ Route::post('update_company_model',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'CompanyController@update',
     ]
@@ -416,7 +448,7 @@ Route::get('delete_company_model',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'CompanyController@delete',
     ]
@@ -428,7 +460,7 @@ Route::get('updateModel',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'CompanyModelController@updateModel',
     ]
@@ -437,7 +469,7 @@ Route::get('deleteModel',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'CompanyModelController@deleteModel',
     ]
@@ -459,7 +491,7 @@ Route::get('add/user',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'UserController@index',
     ]
@@ -469,7 +501,7 @@ Route::post('insert/user',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'UserController@create',
     ]
@@ -480,7 +512,7 @@ Route::get('user/listing',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'UserController@listingPage',
     ]
@@ -490,7 +522,7 @@ Route::get('edit_user',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'UserController@edit',
     ]
@@ -500,7 +532,7 @@ Route::post('update_user',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'UserController@update',
     ]
@@ -510,7 +542,7 @@ Route::get('delete_user',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'UserController@delete',
     ]
@@ -519,7 +551,7 @@ Route::get('active_delete_user',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'UserController@active_delete_user',
     ]
@@ -529,7 +561,7 @@ Route::get('deleted_user/listing',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'UserController@deleteUserListing',
     ]
@@ -557,7 +589,7 @@ Route::get('add/group',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'GroupController@index',
     ]
@@ -567,7 +599,7 @@ Route::post('insert/group',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'GroupController@create',
     ]
@@ -578,7 +610,7 @@ Route::get('group/listing',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'GroupController@listingPage',
     ]
@@ -588,7 +620,7 @@ Route::get('group_detail',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'GroupController@groupDetail',
     ]
@@ -598,7 +630,7 @@ Route::get('edit_group',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'GroupController@edit',
     ]
@@ -608,7 +640,7 @@ Route::get('edit_my_group',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'GroupController@editListingPage',
     ]
@@ -617,7 +649,7 @@ Route::get('group_detail',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'GroupController@groupDetail',
     ]
@@ -627,7 +659,7 @@ Route::get('edit_group_detail',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'GroupController@editMyGroup',
     ]
@@ -637,7 +669,7 @@ Route::post('update_group',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'GroupController@update',
     ]
@@ -647,7 +679,7 @@ Route::get('delete_group',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'GroupController@delete',
     ]
@@ -658,7 +690,7 @@ Route::get('get_order_page',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'GroupController@getOrder',
     ]
@@ -669,7 +701,7 @@ Route::get('order_listing',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'OrderController@orderListing',
     ]
@@ -679,7 +711,7 @@ Route::get('order_detail/{id}',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'OrderController@orderDetail',
     ]
@@ -689,7 +721,7 @@ Route::get('order_delete/{id}',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'OrderController@orderDelete',
     ]
@@ -699,7 +731,7 @@ Route::get('delete_item_from_order/{id}',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'OrderController@deleteItemFromOrder',
     ]
@@ -709,7 +741,7 @@ Route::post('addItemIntoOrder',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'OrderController@addItemIntoOrder',
     ]
@@ -719,7 +751,7 @@ Route::get('order_update/{id}',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'OrderController@updateOrder',
     ]
@@ -729,7 +761,7 @@ Route::get('getCompanies',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'GroupController@getCompaniesList',
     ]
@@ -742,7 +774,7 @@ Route::get('add_shop_into_group',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'GroupController@addShopIntoGroup',
     ]
@@ -752,7 +784,7 @@ Route::get('deleteShop',
     [
         'middleware'=>
             [
-                // 'webValidate:forgetPasswordRequest'
+               'webAuthenticate'
             ],
         'uses'=>'GroupController@deleteRecordFromDetail',
     ]
@@ -763,7 +795,7 @@ Route::get('add_Items',
     [
         'middleware'=>
             [
-
+                'webAuthenticate'
             ],
         'uses'=>'CompanyModelController@addItems',
     ]
@@ -773,7 +805,7 @@ Route::post('insert_model_items',
     [
         'middleware'=>
             [
-
+                'webAuthenticate'
             ],
         'uses'=>'CompanyModelController@insertItems',
     ]
@@ -782,7 +814,7 @@ Route::post('insert_model_items',
 Route::get('item_listing',
     [
         'middleware'=>
-            [
+            ['webAuthenticate'
 
             ],
         'uses'=>'CompanyModelController@itemListingPage',
@@ -792,7 +824,7 @@ Route::get('add_item_discount',
     [
         'middleware'=>
             [
-
+                'webAuthenticate'
             ],
         'uses'=>'CompanyModelController@itemDiscountPage',
     ]
@@ -801,16 +833,25 @@ Route::get('item_discount_listing',
     [
         'middleware'=>
             [
-
+                'webAuthenticate'
             ],
         'uses'=>'CompanyModelController@itemDiscount',
+    ]
+);
+Route::get('/edit_discount_item',
+    [
+        'middleware'=>
+            [
+                'webAuthenticate'
+            ],
+        'uses'=>'CompanyModelController@editItemDiscount',
     ]
 );
 Route::get('getCompanyItemListing',
     [
         'middleware'=>
             [
-
+                'webAuthenticate'
             ],
         'uses'=>'CompanyModelController@getCompanyItemListing',
     ]
@@ -821,7 +862,7 @@ Route::get('getItemsForDiscount',
     [
         'middleware'=>
             [
-
+                'webAuthenticate'
             ],
         'uses'=>'CompanyModelController@getItemsForDiscount',
     ]
@@ -830,7 +871,7 @@ Route::post('insert/item/discount',
     [
         'middleware'=>
             [
-
+                'webAuthenticate'
             ],
         'uses'=>'CompanyModelController@insertItemDiscount',
     ]
@@ -839,7 +880,7 @@ Route::get('checkItemCondition',
     [
         'middleware'=>
             [
-
+                'webAuthenticate'
             ],
         'uses'=>'CompanyModelController@checkItemCondition',
     ]
@@ -848,7 +889,7 @@ Route::get('getItems',
     [
         'middleware'=>
             [
-
+                'webAuthenticate'
             ],
         'uses'=>'CompanyModelController@getItems',
     ]
@@ -857,7 +898,7 @@ Route::post('place_order',
     [
         'middleware'=>
             [
-
+                'webAuthenticate'
             ],
         'uses'=>'OrderController@placeOrder',
     ]
@@ -867,7 +908,7 @@ Route::get('order_finish/{id}',
     [
         'middleware'=>
             [
-
+                'webAuthenticate'
             ],
         'uses'=>'OrderController@finishOrder',
     ]
@@ -878,7 +919,7 @@ Route::get('add/stock',
     [
         'middleware'=>
             [
-
+                'webAuthenticate'
             ],
         'uses'=>'StockController@index',
     ]
@@ -888,7 +929,7 @@ Route::post('insert/stock',
     [
         'middleware'=>
             [
-
+                'webAuthenticate'
             ],
         'uses'=>'StockController@insert',
     ]
@@ -897,7 +938,7 @@ Route::get('stock/listing',
     [
         'middleware'=>
             [
-
+                'webAuthenticate'
             ],
         'uses'=>'StockController@listing',
     ]
@@ -907,7 +948,7 @@ Route::get('delete/stock/{id}',
     [
         'middleware'=>
             [
-
+                'webAuthenticate'
             ],
         'uses'=>'StockController@deleteStock',
     ]
@@ -917,9 +958,23 @@ Route::get('update/stock/{id}',
     [
         'middleware'=>
             [
-
+                'webAuthenticate'
             ],
         'uses'=>'StockController@updateStock',
     ]
 );
 
+Route::post('update/stock/Quantity',
+    [
+        'middleware'=>
+            [
+                'webAuthenticate'
+            ],
+        'uses'=>'StockController@updateStockQuantity',
+    ]
+);
+
+Route::get('/logout', function(Illuminate\Http\Request $request){
+    $request->session()->flush();
+    return redirect('/');
+});

@@ -20,7 +20,9 @@
                         <th>Third Modle</th>
                         <th>Item</th>
                         <th>Type</th>
-                        <th>Date/Time</th>
+                        <th>Quantity</th>
+                       <th>Date/Time</th>
+
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -35,7 +37,9 @@
 
                         <td> {{ $stock->item->item }}   </td>
                         <td> {{ $stock->item_type }}   </td>
+                        <td> {{ $stock->qty }}</td>
                         <td> {{ $stock->thirdModel->created_at }}   </td>
+
                         <td>
                             
                             <div class="action-btn"> 

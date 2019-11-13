@@ -19,25 +19,25 @@
                             <div class="col-sm-6 col-md-4 col-lg-3">
                                 <div class="form-group">
                                     <label>Shop Name</label>
-                                    <input type="text" class="form-control"name="shop_name" required>
+                                    <input type="text" class="form-control" name="shop_name" required>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-4 col-lg-3">
                                 <div class="form-group">
                                     <label>Person Name</label>
-                                    <input type="text" class="form-control"name="person_name" required>
+                                    <input type="text" class="form-control" name="person_name" required>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-4 col-lg-3">
                                 <div class="form-group">
                                     <label>Mobile</label>
-                                    <input type="text" class="form-control"name="mobile" required>
+                                    <input type="text" class="form-control" name="mobile" required>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-4 col-lg-3">
                                 <div class="form-group">
                                     <label>Work Type</label>
-                                    <input type="text" class="form-control"name="work_type" required>
+                                    <input type="text" class="form-control" name="work_type" required>
                                 </div>
                             </div>
                             <div class="col-sm-12">
@@ -55,19 +55,19 @@
                             <div class="col-sm-6 col-md-4 col-lg-3">
                                 <div class="form-group">
                                     <label>WhatsApp</label>
-                                    <input type="text" class="form-control"name="whats_app" >
+                                    <input type="text" class="form-control" name="whats_app" >
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-4 col-lg-3">
                                 <div class="form-group">
                                     <label>PTCL</label>
-                                    <input type="text" class="form-control"name="ptcl" >
+                                    <input type="text" class="form-control" name="ptcl" >
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-4 col-lg-3">
                                 <div class="form-group">
                                     <label>City Name</label>
-                                    <select name="city_id"  class="form-control"required>
+                                    <select name="city_id"  class="form-control" required>
                                         @foreach($response['data']['cities'] as $city)
                                             <option value="{{$city->id}}">{{$city->name}}</option>
                                         @endforeach
@@ -75,10 +75,16 @@
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-4 col-lg-3">
-                                <input type="hidden" name="society" class="form-control">
+                                <div class="form-group">
+                                    <label>Society</label>
+                                    <input type="text" name="society" class="form-control"  required>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-lg-3">
+
                                 <div class="form-group mb-0">
                                     <label>Address</label>
-                                    <input type="text" class="form-control"name="address" required>
+                                    <input type="text" class="form-control" name="address" required>
                                 </div>
                             </div>
                         </div>
@@ -88,7 +94,7 @@
                             <div class="col-sm-6 col-md-4 col-lg-3">
                                 <div class="form-group">
                                     <label>Email</label>
-                                    <input type="email" class="form-control"name="email" >
+                                    <input type="email" class="form-control" name="email" >
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-4 col-lg-3">
@@ -100,7 +106,7 @@
                             <div class="col-sm-6 col-md-4 col-lg-3">
                                 <div class="form-group">
                                     <label>Facebook URL</label>
-                                    <input type="text" class="form-control"name="facebook" >
+                                    <input type="text" class="form-control" name="facebook" >
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-4 col-lg-3">

@@ -19,9 +19,9 @@
                     <thead>
                     <tr>
                         <th>Company Name</th>
-                        <th>First Model Name </th>
-                        <th>Second Model Name </th>
-                        <th>Third Model Name </th>
+                        <th>First Name </th>
+                        <th>Second Name </th>
+                        <th>Third Name </th>
                         <th>Items </th>
                         <th>purchase Price </th>
                         <th>Sale Price </th>
@@ -37,7 +37,7 @@
                         <td>{{$modelItem->fName}} </td>
                         <td>{{$modelItem->sName}} </td>
                         <td>{{$modelItem->tName}} </td>
-                        <td>{{$modelItem->tName}} </td>
+                        <td>{{$modelItem->item}} </td>
                         <td>{{$modelItem->purchase_price}} </td>
                         <td>{{$modelItem->price}} </td>
                         <td>{{$modelItem->created_at}}</td>

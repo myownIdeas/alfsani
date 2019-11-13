@@ -19,11 +19,11 @@ class DashboardController  extends Controller
         $this->response = $webResponse;
 
     }
-    public function index()
+    public function index(Request $request)
     {
         ;
         return $this->response->setView("web.dashboard.dashboard")->respond(["data"=>[
-            'records'=>$this->dashboardRecords()
+            'records'=>$this->dashboardRecords($request->session()->get('user'))
             ]]);
     }
 

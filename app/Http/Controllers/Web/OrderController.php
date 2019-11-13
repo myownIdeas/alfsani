@@ -10,6 +10,7 @@ use App\Company;
 use App\OrderDetail;
 use App\Status;
 use App\Stock;
+use App\User;
 use Illuminate\Http\Request as Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -50,6 +51,7 @@ class OrderController  extends Controller
         return $this->response->setView("web.order.detail")->respond(["data"=>[
             'orderDetail'=>$orderDetail,
             'orderStatus'=>Status::all(),
+            'users'=>User::all(),
             'order'=>$order
         ]]);
     }
@@ -121,6 +123,8 @@ class OrderController  extends Controller
     }
 
     public function placeOrder(Request  $request){
+        try {
+
 
             $user = $request->session()->get('user');
             $order = new Order();
@@ -129,73 +133,79 @@ class OrderController  extends Controller
             $order->agent_id = $user->id;
             $order->delivery_agent = 0;
             $order->order_date = date('Y/d/m');
+            $order->order_time = date('h:i:s a');
             $order->total_price = 0;
             $order->status = 1;
             $order->save();
             $orderId = $order->id;
-            $final=[];
-        //dd($request->all());
+            $final = [];
+            //dd($request->all());
 
-        $linPrice ='';
-        $totalPrice = 0;
-        $afterDiscount = 0;
-            foreach($request->itemId as $key=>$order){
+            $linPrice = '';
+            $totalPrice = 0;
+            $afterDiscount = 0;
+            foreach ($request->itemId as $key => $order) {
 
-                $findKey= key($order);
+                $findKey = key($order);
 
-               // dd($findKey);
+                // dd($findKey);
                 $itemDiscount = DB::table('company_item')
                     ->select('item_discount.discount_rate')
-                    ->leftJoin('item_discount','company_item.id','=','item_discount.item_id')
-                    ->where('company_item.company_id',$request->company_id[$findKey])
-                    ->where('company_item.third_model',$request->third_model[$findKey])
-                    ->where('item_discount.shop_id',$request->shop_id)
-                    ->where('item_discount.item_id',$order[$findKey])
+                    ->leftJoin('item_discount', 'company_item.id', '=', 'item_discount.item_id')
+                    ->where('company_item.company_id', $request->company_id[$findKey])
+                    ->where('company_item.third_model', $request->third_model[$findKey])
+                    ->where('item_discount.shop_id', $request->shop_id)
+                    ->where('item_discount.item_id', $order[$findKey])
                     ->get();
-                if(isset($itemDiscount[0])){
+                if (isset($itemDiscount[0])) {
 
 
                     $linPrice = $request->linePrice[$findKey];
                     $totalPrice = $totalPrice + ($request->quantity[$findKey] * $request->linePrice[$findKey]);
-                    $linDiscountPrice = (($totalPrice * $itemDiscount[0]->discount_rate)/100);
+                    $linDiscountPrice = (($totalPrice * $itemDiscount[0]->discount_rate) / 100);
                     $afterDiscount = $totalPrice - $linDiscountPrice;
-                    $itemDiscount =$itemDiscount[0]->discount_rate;
-                }else{
-                    $itemDiscount =0;
+                    $itemDiscount = $itemDiscount[0]->discount_rate;
+                } else {
+                    $itemDiscount = 0;
                     $linPrice = $request->linePrice[$findKey];
-                    $totalPrice = $totalPrice + ($request->quantity[$findKey] *$request->linePrice[$findKey]) ;
+                    $totalPrice = $totalPrice + ($request->quantity[$findKey] * $request->linePrice[$findKey]);
                     $afterDiscount = $totalPrice;
                 }
 
 
                 $final[] = [
-                    'order_id'=>$orderId,
-                    'company_id'=>$request->company_id[$findKey],
-                    'first_model'=>$request->model_id[$findKey],
-                    'second_model'=>$request->second_model[$findKey],
-                    'third_model'=>$request->third_model[$findKey],
-                    'item_id'=>$order[$findKey],
-                    'item_discount'=>$itemDiscount,
-                    'quantity'=>$request->quantity[$findKey],
-                    'set_pack'=>$request->item_set[$findKey],
-                    'line_price'=>$linPrice,
+                    'order_id' => $orderId,
+                    'company_id' => $request->company_id[$findKey],
+                    'first_model' => $request->model_id[$findKey],
+                    'second_model' => $request->second_model[$findKey],
+                    'third_model' => $request->third_model[$findKey],
+                    'item_id' => $order[$findKey],
+                    'item_discount' => $itemDiscount,
+                    'quantity' => $request->quantity[$findKey],
+                    'set_pack' => $request->item_set[$findKey],
+                    'line_price' => $linPrice,
                 ];
             }
 
-        DB::table('order_detail')->insert($final);
-        $orderPrice =  Order::where('id',$orderId)->first();
-        $orderPrice->total_price = $totalPrice;
-        $orderPrice->after_discount = $afterDiscount;
-        $orderPrice->save();
+            DB::table('order_detail')->insert($final);
+            $orderPrice = Order::where('id', $orderId)->first();
+            $orderPrice->total_price = $totalPrice;
+            $orderPrice->after_discount = $afterDiscount;
+            $orderPrice->save();
 
 
-        return Redirect::back();
-
+            return Redirect::back();
+        }catch (\Exception $e){
+            $record = ['request'=>serialize($request->all()),'exception'=>serialize($e->getMessage())
+            ,'date'=>date('Y/m/d h:m:s')];
+            DB::table('order_logs')->insert($record);
+            return Redirect::back();
+        }
     }
 
     public function addOrderAmount(Request  $request){
         $user =  $request->session()->get('user');
-        $record = ['order_id'=>$request->orderId,'amount'=>$request->amount,'created_by'=>$user->id];
+        $record = ['order_id'=>$request->orderId,'order_payment_type'=>$request->status,'amount'=>$request->amount,'created_by'=>$user->id];
         DB::table('order_payment_detail')->insert($record);
         return json_encode(['res'=>true]);
 
@@ -203,6 +213,14 @@ class OrderController  extends Controller
     public function changeOrderStatus(Request  $request){
             $order = Order::where('id',$request->orderId)->first();
             $order->status = $request->statusId;
+            $order->finish_date =  date('Y/d/m h:i:s a');
+            $order->save();
+            return json_encode(['res'=>true]);
+    }
+
+    public function assignOrderTo(Request  $request){
+            $order = Order::where('id',$request->orderId)->first();
+            $order->agent_id = $request->agentId;
             $order->save();
             return json_encode(['res'=>true]);
     }

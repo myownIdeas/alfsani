@@ -33,9 +33,22 @@
                                         <label>Order By:</label>
                                         <span class="text-muted">{{$response['data']['order']->agent->name}}</span>
                                     </li>
+                                    @if( \Session::get('user')->user_type ==1 &&  $response['data']['order']->status ==2)
+                                    <li>
+                                        <label>Order Status:</label>
+                                        <b>Finish</b>
+                                    </li>
+                                    @endif
+                                    @if( \Session::get('user')->user_type ==1 &&  $response['data']['order']->status ==2)
+                                        <li>
+                                            <label>Finish Date:</label>
+                                            <b>{{$response['data']['order']->finish_date}}</b>
+                                        </li>
+                                    @endif
                                 </ul>
+                                @if( \Session::get('user')->user_type ==1 &&  $response['data']['order']->status !=2)
                                 <div class="form-group mt-3 mb-0">
-
+                                    <label>Change Order Status</label>
                                     <select name="" id="" class="form-control" onchange="onStatusChange({{$response['data']['order']->id}},this.value)">
                                         <option value="">Please Select The Status</option>
                                         @foreach($response['data']['orderStatus'] as $status)
@@ -44,8 +57,21 @@
 
                                     </select>
                                 </div>
+                                <div class="form-group mt-3 mb-0">
+                                    <label>Assign Order</label>
+                                    <select name="" id="" class="form-control" onchange="assignOrder({{$response['data']['order']->id}},this.value)">
+                                        <option value="">Please Select The Status</option>
+                                        @foreach($response['data']['users'] as $user)
+                                            <option value="{{$user->id}}" @if($user->id == $response['data']['order']->agent_id) selected  @endif>{{$user->name}}</option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
+
+                                    @endif
                             </div>
                         </div>
+                        @if( \Session::get('user')->user_type ==1 &&  $response['data']['order']->status !=2)
                         <div class="col-lg-4">
 
                             <div class="card-gray mb-4">
@@ -54,23 +80,35 @@
                                     <li>
                                         <label>Amount:</label>
                                         <input type="text" class="form-control" id="new_payment" name="payment" >
+                                        <br />
+                                        <select class="form-control" id="order_payment_type">
+                                            <option value="">Please Select Type</option>
+                                            <option value="settlement">Settlement</option>
+                                            <option value="installment">Installment</option>
+                                            <option value="clear">Payment Clear</option>
+                                        </select>
+                                        <br />
                                         <button type="button" onclick="addNewPayment({{$response['data']['order']->id}})" class="btn btn-primary">Submit</button>
                                     </li>
                                 </ul>
 
                             </div>
                         </div>
+                        @endif
                         <div class="col-lg-4">
                             <div class="card-gray mb-4">
                                 <h2>Payment Detail</h2>
+                                <br />
+                                Total Amount:  {{$response['data']['order']->total_price}}
                                 <ul class="ast-data-list mt-3">
                                     <?php $rcPrice = 0; ?>
                                 @foreach($response['data']['order']->payments as $payment)
                                     <?php $rcPrice = $rcPrice + $payment->amount  ?>
                                 <li>
-                                   Amount: {{$payment->amount}}
+                                   Amount: {{$payment->amount .' '.$payment->order_payment_type}}
                                 </li>
                                 @endforeach
+                                        <br />
                                     <li>Recevied Amount : {{$rcPrice}}</li>
 
                                     <li>Left Amount : {{($response['data']['order']->after_discount - $rcPrice)}}</li>
@@ -82,7 +120,9 @@
                         </div>
 
                     </div>
+                    @if( \Session::get('user')->user_type ==1 &&  $response['data']['order']->status !=2)
                     <a href="" class="btn btn-primary btn-sm float-right mt-2" data-toggle="modal" data-target="#addEditModal"><i class="fa fa-plus"></i> Add New</a>
+                   @endif
                     <h3 class="heading3">Order Detail</h3>
                     <table class="table listing-table table-hover">
                         <thead>
@@ -94,8 +134,11 @@
                                 <th>Year</th>
                                 <th>Item</th>
                                 <th>Quantiy</th>
+                                <th>Discount</th>
                                 <th>Amount</th>
+                                @if( \Session::get('user')->user_type ==1 &&  $response['data']['order']->status !=2)
                                 <th class="text-center">Actions</th>
+                                    @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -110,10 +153,13 @@
                                 <td>{{$detail->thirdModel->year}}</td>
                                 <td>{{$detail->item->item}}</td>
                                 <td>{{$detail->quantity}}</td>
+                                <td>{{(($detail->quantity * $detail->line_price) *$detail->item_discount)/100}}</td>
                                 <td>{{($detail->quantity * $detail->line_price)}}</td>
+                                @if( \Session::get('user')->user_type ==1 &&  $response['data']['order']->status !=2)
                                 <td>
                                     <a href="" class="btn-link"><i class="fas fa-pencil-alt"></i></a>
                                 </td>
+                                @endif
                             </tr>
                             @endforeach
 
@@ -142,7 +188,7 @@
                                     <td class="text-right">{{$response['data']['order']->total_price}}</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Discount</strong></td>
+                                    <td><strong>Total Discount</strong></td>
                                     <td class="text-right">{{($response['data']['order']->total_price - $response['data']['order']->after_discount)}}</td>
                                 </tr>
                                 <tr>
@@ -241,6 +287,11 @@
 </div>
 <script>
     function addNewPayment(orderId) {
+        var status = $('#order_payment_type').val();
+        if(status ==null || status ==""){
+            alert('please select the payment status first');
+            return false;
+        }
         if($('#new_payment').val() !=""){
             $.ajax({
 
@@ -248,7 +299,7 @@
 
                 url: url + '/addOrderAmount',
 
-                data: { amount: $('#new_payment').val(),orderId:orderId},
+                data: { amount: $('#new_payment').val(),orderId:orderId,status:status},
 
                 success: function(data) {
                         window.location.reload()
@@ -257,6 +308,20 @@
         }else{
             alert('please add the amount');
         }
+    }
+    function assignOrder(orderId,agentid) {
+        $.ajax({
+
+            type: 'GET',
+
+            url: url + '/assignOrderTo',
+
+            data: {orderId:orderId,agentId:agentid},
+
+            success: function(data) {
+                window.location.reload()
+            }
+        });
     }
     function onStatusChange(orderId,statusId) {
         let receiveAmount = $('#rcprice').val()
