@@ -651,6 +651,10 @@ a.article:hover {
     height: calc(1.5em + .75rem + 7px);
 }
 
+.form-control-sm {
+    height: calc(1.5em + .5rem + 2px) !important;
+}
+
 .form-control:focus {
     border: 1px solid #517397;
     box-shadow: none;
@@ -1044,4 +1048,79 @@ label {
 
 .header-right {
     font-size: 12px;
+}
+
+@keyframes fadeEffects {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: .2;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.status {
+    display: inline-flex;
+    align-items: center;
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+.status span {
+    width: 8px;
+    height: 8px;
+    margin-right: 5px;
+    border-radius: 50%;
+    animation: fadeEffects 1s ease-in-out infinite;
+}
+
+.status-primary {
+    color: #007bff;
+}
+
+.status-primary span {
+    background-color: #007bff;
+}
+
+.status-secondary {
+    color: #6c757d;
+}
+
+.status-secondary span {
+    background-color: #6c757d;
+}
+
+.status-info {
+    color: #17a2b8;
+}
+
+.status-info span {
+    background-color: #17a2b8;
+}
+
+.status-warning {
+    color: #ffc107;
+}
+
+.status-warning span {
+    background-color: #ffc107;
+}
+
+.status-warning {
+    color: #28a745;
+}
+
+.status-warning span {
+    background-color: #28a745;
+}
+
+.status-danger {
+    color: #dc3545;
+}
+
+.status-danger span {
+    background-color: #dc3545;
 }

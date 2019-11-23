@@ -13,8 +13,8 @@
             <div class="card-content">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-4">
-                            <div class="card-gray mb-4">
+                        <div class="col-lg-4 mb-4">
+                            <div class="card-gray h-100">
                                 <h2>INVOICE</h2>
                                 <ul class="ast-data-list mt-3">
                                     <li>
@@ -49,7 +49,7 @@
                                 @if( \Session::get('user')->user_type ==1 &&  $response['data']['order']->status !=2)
                                 <div class="form-group mt-3 mb-0">
                                     <label>Change Order Status</label>
-                                    <select name="" id="" class="form-control" onchange="onStatusChange({{$response['data']['order']->id}},this.value)">
+                                    <select name="" id="" class="form-control form-control-sm w-50 d-inline-block" onchange="onStatusChange({{$response['data']['order']->id}},this.value)">
                                         <option value="">Please Select The Status</option>
                                         @foreach($response['data']['orderStatus'] as $status)
                                             <option value="{{$status->id}}" @if($status->id == $response['data']['order']->status) selected  @endif>{{$status->name}}</option>
@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="form-group mt-3 mb-0">
                                     <label>Assign Order</label>
-                                    <select name="" id="" class="form-control" onchange="assignOrder({{$response['data']['order']->id}},this.value)">
+                                    <select name="" id="" class="form-control form-control-sm w-50 d-inline-block" onchange="assignOrder({{$response['data']['order']->id}},this.value)">
                                         <option value="">Please Select The Status</option>
                                         @foreach($response['data']['users'] as $user)
                                             <option value="{{$user->id}}" @if($user->id == $response['data']['order']->agent_id) selected  @endif>{{$user->name}}</option>
@@ -72,46 +72,51 @@
                             </div>
                         </div>
                         @if( \Session::get('user')->user_type ==1 &&  $response['data']['order']->status !=2)
-                        <div class="col-lg-4">
+                        <div class="col-lg-4 mb-4">
 
-                            <div class="card-gray mb-4">
+                            <div class="card-gray h-100">
                                 <h2>Add Payment</h2>
                                 <ul class="ast-data-list mt-3">
                                     <li>
-                                        <label>Amount:</label>
-                                        <input type="text" class="form-control" id="new_payment" name="payment" >
-                                        <br />
-                                        <select class="form-control" id="order_payment_type">
-                                            <option value="">Please Select Type</option>
-                                            <option value="settlement">Settlement</option>
-                                            <option value="installment">Installment</option>
-                                            <option value="clear">Payment Clear</option>
-                                        </select>
-                                        <br />
-                                        <button type="button" onclick="addNewPayment({{$response['data']['order']->id}})" class="btn btn-primary">Submit</button>
+                                        <div class="form-group">
+                                            <label>Amount:</label>
+                                            <input type="text" class="form-control" id="new_payment" name="payment">
+                                        </div>
+                                        <div class="form-group">
+                                            <select class="form-control" id="order_payment_type">
+                                                <option value="">Please Select Type</option>
+                                                <option value="settlement">Settlement</option>
+                                                <option value="installment">Installment</option>
+                                                <option value="clear">Payment Clear</option>
+                                            </select>
+                                        </div>
+                                        <div class="text-right">
+                                            <button type="button" onclick="addNewPayment({{$response['data']['order']->id}})" class="btn btn-primary">Submit</button>
+                                        </div>
                                     </li>
                                 </ul>
 
                             </div>
                         </div>
                         @endif
-                        <div class="col-lg-4">
-                            <div class="card-gray mb-4">
+                        <div class="col-lg-4 mb-4">
+                            <div class="card-gray h-100">
                                 <h2>Payment Detail</h2>
-                                <br />
-                                Total Amount:  {{$response['data']['order']->total_price}}
+                                <ul class="ast-data-list mt-3">
+                                    <li>
+                                        <label>Total Amount:</label> <span class="text-muted">{{$response['data']['order']->total_price}}</span>
+                                    </li>
+                                </ul>
                                 <ul class="ast-data-list mt-3">
                                     <?php $rcPrice = 0; ?>
-                                @foreach($response['data']['order']->payments as $payment)
-                                    <?php $rcPrice = $rcPrice + $payment->amount  ?>
-                                <li>
-                                   Amount: {{$payment->amount .' '.$payment->order_payment_type}}
-                                </li>
-                                @endforeach
-                                        <br />
-                                    <li>Recevied Amount : {{$rcPrice}}</li>
-
-                                    <li>Left Amount : {{($response['data']['order']->after_discount - $rcPrice)}}</li>
+                                    @foreach($response['data']['order']->payments as $payment)
+                                        <?php $rcPrice = $rcPrice + $payment->amount  ?>
+                                    <li>
+                                        <label>Amount:</label> <span class="text-muted">{{$payment->amount .' '.$payment->order_payment_type}}</span>
+                                    </li>
+                                    @endforeach
+                                    <li><label>Recevied Amount:</label> <span class="text-muted">{{$rcPrice}}</span></li>
+                                    <li><label>Left Amount:</label> <span class="text-muted">{{($response['data']['order']->after_discount - $rcPrice)}}</span></li>
                                 </ul>
                                 <input type="hidden" id="rcprice" value="{{$rcPrice}}">
                                 <input type="hidden" id="totalprice" value="{{$response['data']['order']->after_discount}}">

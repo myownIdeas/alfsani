@@ -10,6 +10,26 @@
         </section>
         <div class="container-fluid">
             <div class="content-box">
+
+                <div class="status status-primary">
+                    <span></span> Primary
+                </div>
+                <div class="status status-secondary">
+                    <span></span> Secondary
+                </div>
+                <div class="status status-info">
+                    <span></span> Info
+                </div>
+                <div class="status status-warning">
+                    <span></span> Warning
+                </div>
+                <div class="status status-success">
+                    <span></span> Success
+                </div>
+                <div class="status status-danger">
+                    <span></span> Danger
+                </div>
+
                 <div class="cst-table-row">
                 <table id="example" class="table listing-table">
                     <thead>
